@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 /**
- * This class represents the navigation bar component.
+ * This class represents the main application component.
  */
 @Component({
   moduleId: module.id,
@@ -9,4 +9,16 @@ import { Component } from '@angular/core';
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.css'],
 })
-export class NavbarComponent { }
+export class NavbarComponent {
+	private menu:boolean = false;
+	@Output() sidebar = new EventEmitter();
+  	constructor() {
+    
+  	}
+  	private togleMenu():void{
+  		this.menu = !this.menu;
+  	}
+  	private togleSidebar():void{
+  		this.sidebar.emit();
+  	}
+}

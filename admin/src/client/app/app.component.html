@@ -1,3 +1,7 @@
-<sd-toolbar></sd-toolbar>
-<sd-navbar></sd-navbar>
-<router-outlet></router-outlet>
+<sd-navbar (sidebar)="hideSiderbar($event)"></sd-navbar>
+<div class="content">
+	<sd-sidebar [hidden]="sidebar"></sd-sidebar>
+	<router-outlet></router-outlet>
+</div>
+<sd-footer></sd-footer>
+<sd-loading [nohidden]="loading" (togleLoading)="togleLoading($event)"></sd-loading>

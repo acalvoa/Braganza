@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=shadowfax
+      - MYSQL_USER=braganza
+      - MYSQL_PASSWORD=shadowfax
+    networks:
+      app:
+        ipv4_address: 172.16.238.2
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=172.16.238.2
+    networks:
+      app:
+        ipv4_address: 172.16.238.3
+  # pet-service:
+  #   build: ./pet-service
+networks:
+  app:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1

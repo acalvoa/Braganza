@@ -12,15 +12,11 @@ import './operators';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent {
-	private sidebar:boolean = false;
-	private loading:boolean = false;
-  	constructor() {
-    	console.log('Environment config', Config);
-  	}
-  	hideSiderbar(){
-  		this.sidebar = !this.sidebar;
-  	}
-  	togleLoading(show:boolean){
-  		this.loading = show;
-  	}
+  private loading:boolean = false;
+	constructor() {
+  	console.log('Environment config', Config);
+	}
+  togleLoading(show:boolean){
+    this.loading = show;
+  }
 }

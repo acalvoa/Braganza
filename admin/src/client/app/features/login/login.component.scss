@@ -1,0 +1,51 @@
+:host{
+	height:100%;
+	width:100%;
+}
+.login{
+	height:100%;
+	width: 100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	.content{
+		display: flex;
+		height: 400px;
+		width: 350px;
+		margin-top:-200px;
+		flex-direction:column;
+		justify-content:center;
+		.logo{
+			height:100px;
+			width:100%;
+			margin-bottom:30px;
+			.img{
+				background-image: url('assets/images/logo.png');
+				height: 100px;
+				background-size:contain;
+				background-repeat: no-repeat;
+				background-position:center center;
+			}
+		}
+		.form{
+			display:flex;
+			flex-direction: column;
+			justify-content:center;
+			form{
+				display:flex;
+				flex-direction: column;
+				 justify-content:center;
+				input{
+					display:flex;
+					margin-top:10px;
+					margin-bottom:10px;
+					width:100%;
+				}
+				button{
+					margin-top:20px;
+					text-align:center;
+				}
+			}
+		}
+	}
+}

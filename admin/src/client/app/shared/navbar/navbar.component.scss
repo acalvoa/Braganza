@@ -3,7 +3,6 @@
 }
 .navbar{
 	display: flex;
-	height:100%;
 	width:100%;
 	background: #333;
 	flex-direction:row;
@@ -15,14 +14,14 @@
 		.logo{
 			margin-top:-5px;
 			display:flex;
-			height:45px;
-			width:45px;
+			height:50px;
+			width:50px;
 			background-color:white;
 			background-size:contain;
 			background-position: center;
 			background-repeat: no-repeat;
-			background-image: url('assets/images/logo.jpg');
-			border-radius: 50px;
+			background-image: url('assets/images/loading.gif');
+			border-radius:50px;
 		}
 		.sidebar{
 			display:flex;
@@ -51,7 +50,7 @@
 }
 .session_menu{
 	position:absolute;
-	top: 60px;
+	top: 68px;
 	right:0px;
 	width:150px;
 	height:auto;

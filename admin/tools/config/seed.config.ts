@@ -174,7 +174,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Earlgrey - Consola de Administración';
+  APP_TITLE = 'Braganza - La madriguera del lobo';
 
   /**
    * Tracking ID.

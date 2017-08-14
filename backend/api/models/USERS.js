@@ -13,6 +13,12 @@ module.exports = {
 	  		primaryKey: true,
 	  		autoIncrement: true
   		},
+      NAME: {
+        type: 'string'
+      },
+      LASTNAME:{
+        type: 'string'
+      },
   		EMAIL: {
   			type: 'email',
   			unique: true
@@ -28,8 +34,35 @@ module.exports = {
   		},
   		GOOGLE: {
   			type: 'string'
-  		}
+  		},
+      toJSON: function () {
+        var user = this.toObject();
+        delete user.PASSWORD;
+        user.FULLNAME = user.NAME+" "+user.LASTNAME;
+        delete user.NAME;
+        delete user.LASTNAME;
+        delete user.TOKEN;
+        return user;
+      }
   	},
+    beforeCreate: function (values, cb) {
+      // Hash password
+      bcrypt.hash(values.PASSWORD, 10, function(err, hash) {
+        if(err) return cb(err);
+        values.PASSWORD = hash;
+        //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
+        cb();
+      });
+    },
+    beforeUpdate: function (values, cb) {
+      // Hash password
+      bcrypt.hash(values.PASSWORD, 10, function(err, hash) {
+        if(err) return cb(err);
+        values.PASSWORD = hash;
+        //calling cb() with an argument returns an error. Useful for canceling the entire operation if some criteria fails.
+        cb();
+      });
+    },
   	autoPK: false,
     tableName: 'USERS'
 };

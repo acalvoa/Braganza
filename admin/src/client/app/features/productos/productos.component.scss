@@ -1,0 +1,32 @@
+:host{
+  width:100%;
+}
+.content{
+  padding:20px;
+  .productos{
+    width:70%;
+    .header{
+      color: #FFF;
+      font-size: 1rem;
+      font-weight: bold;
+      display:flex;
+      flex-direction:row;
+      .title{
+        display:flex;
+        flex:1;
+      }
+      .search{
+        display:flex;
+        flex:1;
+        justify-content:flex-end;
+        i{
+          font-size:1.2rem;
+        }
+        input{
+          margin-left: 10px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}

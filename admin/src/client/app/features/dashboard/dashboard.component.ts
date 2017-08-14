@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+  selector: 'sd-dashboard',
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css'],
 })
-export class HomeComponent {
+export class DashboardComponent {
   	private sidebar:boolean = false;
   	constructor() {
     

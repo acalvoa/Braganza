@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-
+import { UserService } from '../../services/user/user.service';
 /**
  * This class represents the main application component.
  */
@@ -12,8 +12,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class NavbarComponent {
 	private menu:boolean = false;
 	@Output() sidebar = new EventEmitter();
-  	constructor() {
-    
+  	constructor(private user:UserService) {
+      
   	}
   	private togleMenu():void{
   		this.menu = !this.menu;
@@ -21,4 +21,7 @@ export class NavbarComponent {
   	private togleSidebar():void{
   		this.sidebar.emit();
   	}
+    private logout(){
+      this.user.logout();
+    }
 }

@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertsComponent } from './alerts/alerts.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -14,9 +15,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [CommonModule, RouterModule,NgbModule],
-  declarations: [NavbarComponent, SidebarComponent, FooterComponent,LoadingComponent],
+  declarations: [NavbarComponent, SidebarComponent, FooterComponent,LoadingComponent,
+  AlertsComponent],
   exports: [CommonModule, FormsModule, RouterModule,
-  NavbarComponent, SidebarComponent, FooterComponent,LoadingComponent]
+  NavbarComponent, SidebarComponent, FooterComponent,LoadingComponent, AlertsComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

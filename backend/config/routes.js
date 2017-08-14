@@ -35,7 +35,8 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
-  '/admin/me': 'ADMINSController.me'
+  '/admin/me': 'ADMINSController.me',
+  '/admin/login': 'ADMINSController.login'
 
   /***************************************************************************
   *                                                                          *

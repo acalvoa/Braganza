@@ -6,12 +6,9 @@ services:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.development.dockerfile
-    command: npm start
+    command: npm start -- --scss
     container_name: angular-seed-start
     image: angular-seed
-    volumes:
-      - .:/home/app/angular-seed
-      - /home/app/angular-seed/node_modules
     networks:
       - dev-network
     ports:

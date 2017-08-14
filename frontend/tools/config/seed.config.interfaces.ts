@@ -19,10 +19,3 @@ export interface ExtendPackages {
   path?: string;
   packageMeta?: any;
 }
-
-export interface SourceMapExplorerOutputFormat {
-  HTML: string;
-  JSON: string;
-  TSV: string;
-  [key: string]: string;
-}

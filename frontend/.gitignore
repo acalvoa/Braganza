@@ -14,9 +14,6 @@ lib-cov
 coverage
 coverage_js
 
-# Directory for source-map-explorer reports
-sme
-
 # ignore documentation
 documentation
 

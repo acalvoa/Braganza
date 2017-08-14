@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Config } from './shared/config/env.config';
+import { UserService } from './services/user/user.service';
 import './operators';
 
 /**
@@ -12,7 +13,7 @@ import './operators';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent {
-  constructor() {
+  constructor(private user:UserService) {
     console.log('Environment config', Config);
   }
 }

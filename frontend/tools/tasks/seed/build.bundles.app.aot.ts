@@ -6,8 +6,7 @@ import Config from '../../config';
 const BUNDLER_OPTIONS = {
   format: 'cjs',
   minify: true,
-  mangle: false,
-  sourceMaps: Config.PRESERVE_SOURCE_MAPS
+  mangle: false
 };
 
 /**

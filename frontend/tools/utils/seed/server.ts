@@ -8,7 +8,6 @@ import Config from '../../config';
 import * as codeChangeTool from './code_change_tools';
 
 const plugins = <any>gulpLoadPlugins();
-
 /**
  * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
  */
@@ -53,7 +52,6 @@ export function watchAppFiles(path: string, fileChangeCallback: (e: any, done: (
     fileChangeCallback(e, afterCall);
   });
 }
-
 /**
  * Starts a new `express` server, serving the static documentation files.
  */
@@ -66,7 +64,7 @@ export function serveDocs() {
   );
 
   server.listen(Config.DOCS_PORT, () =>
-    openResource(getResourceUrl(Config.DOCS_PORT))
+    openResource('http://localhost:' + Config.DOCS_PORT + Config.APP_BASE)
   );
 }
 
@@ -82,7 +80,7 @@ export function serveCoverage() {
   );
 
   server.listen(Config.COVERAGE_PORT, () =>
-    openResource(getResourceUrl(Config.COVERAGE_PORT))
+    openResource('http://localhost:' + Config.COVERAGE_PORT + Config.APP_BASE)
   );
 }
 
@@ -102,10 +100,6 @@ export function serveProd() {
   server.use(fallback('index.html', { root }));
 
   server.listen(Config.PORT, () =>
-    openResource(getResourceUrl(Config.PORT))
+    openResource('http://localhost:' + Config.PORT + Config.APP_BASE)
   );
-}
-
-function getResourceUrl(port: number) {
-  return `http://localhost:${port}${Config.APP_BASE}`;
 }

@@ -5,11 +5,11 @@ import { Component } from '@angular/core';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-configuraciones',
-  templateUrl: 'configuraciones.component.html',
-  styleUrls: ['configuraciones.component.css'],
+  selector: 'sd-admin',
+  templateUrl: 'admins.component.html',
+  styleUrls: ['admins.component.css'],
 })
-export class ConfiguracionesComponent {
+export class AdminsComponent {
   	constructor() {
     
   	}

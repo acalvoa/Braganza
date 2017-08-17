@@ -9,15 +9,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { ProductosComponent } from './productos/productos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VitrinaComponent } from './vitrina/vitrina.component';
+import { PipesModule } from '../pipes/pipes.module';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, SharedModule],
-  declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent],
+  declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
+  VitrinaComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,
-  AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent]
+  AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent]
 })
 export class FeaturesModule {
 }

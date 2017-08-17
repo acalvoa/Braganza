@@ -1,0 +1,163 @@
+.container{
+  position: fixed;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: rgba(255,255,255,0.8);
+  z-index: 100;
+  top:0px;
+  left: 0px;
+  justify-content: center;
+    align-items: center;
+  .box{
+    background:rgb(255,255,255);
+    height:700px;
+    width:800px;
+    border: 1px solid #666;
+    .header{
+      height:30px;
+      background:#666;
+      color:#FFF;
+      padding:5px;
+      font-weight:bold;
+      display:flex;
+      flex-direction:row;
+      .title{
+        display:flex;
+        flex:1;
+        justify-content:flex-start;
+      }
+      .closebtn{
+        display:flex;
+        flex:1;
+        justify-content:flex-end;
+        align-content:flex-end;
+        i{
+          cursor:pointer;
+        }
+      }
+    }
+    .body{
+      width:100%;
+      height: calc(100% - 30px);
+      .image_container{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        width:100%;
+        height: calc(100% - 50px);
+        padding:20px;
+        align-content:flex-start;
+        .image{
+          margin:10px;
+          height:165px;
+          width:165px;
+          background:#000;
+        }
+        .selected{
+          border: 1px solid #4F8CFF;
+        }
+      }
+      .photo_uploader{
+        padding:10px;
+        height:calc(100% - 50px);
+        input{
+          width: 0%;
+          height: 0%;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+        }
+        .photo-uploader{
+          display: flex;
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          border: 2px #999 dashed;
+          overflow: hidden;
+          display:flex;
+          align-content:center;
+          align-items:center;
+          justify-content:center;
+          label{
+            height: 200px;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            div{
+              display: flex;
+              align-self:center;
+
+            }
+          }
+          
+        }
+        .drag-over{
+          border: 2px #333 dashed;
+        }
+        .photo-item{
+          display: flex;
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          background-size:cover;
+          overflow: hidden;
+          margin-right: 10px;
+          flex-direction: column;
+          .deletebutton{
+            display: flex;
+            flex-direction: row-reverse;
+            top: 0px;
+            right: 0px;
+            width:100%;
+            height: 30px;
+            font-size: 20px;
+            color: red;
+            i{
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .footer{
+        border-top:1px solid #CCC;
+        padding:5px 10px;
+        display:flex;
+        .paginator{
+          display:flex;
+          flex-direction:row;
+          flex:2;
+          .number{
+            display:flex;
+            height:40px;
+            width:40px;
+            align-content:center;
+            justify-content:center;
+            align-items:center;
+            cursor:pointer;
+          }
+          .selected{
+            color:#4F8CFF;
+            background:#EEE;
+          }
+        }
+        .buttons{
+          display:flex;
+          justify-content:flex-end;
+          flex:1;
+          button{
+            margin-right:10px;
+          }
+        }
+        .buttons_load{
+          display:flex;
+          justify-content:flex-star;
+          flex:1;
+        }
+      }
+    }
+  }
+}
+.displayed{
+  display:flex;
+}

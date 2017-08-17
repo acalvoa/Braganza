@@ -8,13 +8,13 @@ import { FooterComponent } from './footer/footer.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsComponent } from './alerts/alerts.component';
-
+import { ImagesModule } from './images/images.module';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule,NgbModule],
+  imports: [CommonModule, RouterModule,NgbModule,ImagesModule],
   declarations: [NavbarComponent, SidebarComponent, FooterComponent,LoadingComponent,
   AlertsComponent],
   exports: [CommonModule, FormsModule, RouterModule,

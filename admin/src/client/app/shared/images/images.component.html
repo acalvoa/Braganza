@@ -1,0 +1,44 @@
+<div class="container" [class.displayed]="show">
+  <div class="box">
+    <div class="header">
+      <div class="title">Administrador de Imagenes</div>
+      <div class="closebtn"><i class="fa fa-times" aria-hidden="true" (click)="toggleview();"></i></div>
+    </div>
+    <div class="body" *ngIf="view=='showcase'">
+      <div class="image_container">
+        <div class="image" *ngFor="let image of image_showcase" (click)="select_image(image)" [class.selected]="image==image_op"></div>
+      </div>
+      <div class="footer">
+        <div class="paginator">
+          <div class="number" *ngFor="let number of pages" [class.selected]="number==page_selected" (click)="paginator(number)">{{ number }}</div>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-success">Elegir</button>
+          <button class="btn btn-warning" (click)="view='load'">Cargar Nueva</button>
+        </div>
+      </div>
+    </div>
+    <div class="body" *ngIf="view=='load'">
+      <div class="photo_uploader">
+        <input type="file" 
+         ngFileSelect (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" id="file-input">
+        <div ngFileDrop class="photo-uploader" 
+        ngFileDrop (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" [ngClass]="{ 'is-drop-over': dragOver }">
+            <label for="file-input" >
+              <div *ngIf="dragOver" >
+                <i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Suelta los archivos
+              </div>
+              <div *ngIf="!dragOver" >
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Agregar Fotografia
+              </div>
+            </label>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="buttons_load">
+          <button class="btn btn-danger" (click)="view='showcase'">Volver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

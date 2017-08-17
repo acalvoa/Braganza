@@ -434,6 +434,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
       '@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'ngx-uploader': 'node_modules/ngx-uploader/bundles/ngx-uploader.umd.js',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -477,6 +478,7 @@ export class SeedConfig {
       '@angular/animations/browser': 'node_modules/@angular/animations/bundles/animations-browser.umd.js',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
+      'ngx-uploader':'node_modules/ngx-uploader/',
       '*': 'node_modules/*'
     },
     packages: {
@@ -522,6 +524,10 @@ export class SeedConfig {
       },
       '@angular/service-worker': {
         main: 'bundles/service-worker.umd.js',
+        defaultExtension: 'js'
+      },
+      'ngx-uploader':{
+        main: 'bundles/ngx-uploader.umd.js',
         defaultExtension: 'js'
       },
       'rxjs': {

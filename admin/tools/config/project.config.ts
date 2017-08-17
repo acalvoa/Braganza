@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
+import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -43,13 +43,13 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. ng2-translate)
-    // let additionalPackages: ExtendPackages[] = [{
-    //   name: 'ng2-translate',
-    //   // Path to the package's bundle
-    //   path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
-    // }];
+    let additionalPackages: ExtendPackages[] = [
+    {
+      name: 'ngx-uploader',
+      path: 'node_modules/ngx-uploader/bundles/ngx-uploader.umd.js'
+    }];
     //
-    // this.addPackagesBundles(additionalPackages);
+    this.addPackagesBundles(additionalPackages);
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

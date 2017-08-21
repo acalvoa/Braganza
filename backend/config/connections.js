@@ -61,6 +61,13 @@ module.exports.connections = {
     password: 'shadowfax', //optional
     database: 'braganza' //optional
   },
+  mysql_localhost: {
+    adapter: 'sails-mysql',
+    host: 'localhost',
+    user: 'root', //optional
+    password: 'shadowfax', //optional
+    database: 'braganza' //optional
+  },
 
   /***************************************************************************
   *                                                                          *

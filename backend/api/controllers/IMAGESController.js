@@ -8,7 +8,6 @@
 module.exports = {
 	create: function(req,res){
 		try{
-
 			req.file('IMAGE').upload({
 			    // don't allow the total upload size to exceed ~10MB
 			    // maxBytes: 10000000
@@ -44,8 +43,11 @@ module.exports = {
 										fs.unlinkSync(ss.fd)
 										return res.json({
 											RESPONSE:200,
-											PHOTO: {
-												PHOTO: photo.ID_IMAGE
+											IMAGE: {
+												ID_IMAGE: photo.ID_IMAGE,
+												NAME: photo.NAME,
+												SIZE: photo.SIZE,
+												MIME: photo.MIME
 											}
 										});
 									} catch(err) {
@@ -79,7 +81,40 @@ module.exports = {
 				IMAGES:value
 			});
 		})
-	}
+	},
+	getImage: function(req,res){
+		var image = req.param('IMAGE');
+		try{
+			IMAGES.findOne({
+				ID_IMAGE: image
+			}).exec(function(err,image){
+				try{
+					if(err) return res.serverError({
+						RESPONSE: 500
+					});
+					if(image){
+						res.set("Content-type", image.MIME);
+						res.header("Cache-Control", 'max-age=31536000');
+						res.header('Expires', '31 Dic 2017 00:00:00 GMT');
+						return res.send(image.DATA);
+					}
+					return res.notFound({
+						RESPONSE:404
+					});
+				} catch(err) {
+					return res.json({
+						RESPONSE:500,
+						ERROR: err
+					});
+				}
+			});
+		} catch(err) {
+				return res.json({
+				RESPONSE:500,
+				ERROR: err
+			});
+		}
+	},
 
 };
 

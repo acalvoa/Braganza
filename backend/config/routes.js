@@ -36,7 +36,10 @@ module.exports.routes = {
     view: 'homepage'
   },
   '/admin/me': 'ADMINSController.me',
-  '/admin/login': 'ADMINSController.login'
+  '/admin/login': 'ADMINSController.login',
+  '/image/list': 'IMAGESController.list',
+  '/image/:IMAGE': 'IMAGESController.getImage'
+
 
   /***************************************************************************
   *                                                                          *

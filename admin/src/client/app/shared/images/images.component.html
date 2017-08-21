@@ -6,7 +6,18 @@
     </div>
     <div class="body" *ngIf="view=='showcase'">
       <div class="image_container">
-        <div class="image" *ngFor="let image of image_showcase" (click)="select_image(image)" [class.selected]="image==image_op"></div>
+        <div class="images_box">
+          <div class="image" *ngFor="let image of image_showcase" (click)="select_image(image)" [style.background-image]="'url('+api+'/image/'+image.ID_IMAGE+')'" [class.selected]="image==image_op"></div>
+        </div>
+        <div class="images_detail">
+          <div class="title"><b>Imagen seleccionada</b></div>
+          <div class="img_selected" [style.background-image]="(image_op)?'url('+api+'/image/'+image_op.ID_IMAGE+')':''"></div>
+          <div class="img_details">
+            <div class="name"><b>Nombre: </b>{{ (image_op)?image_op.NAME:'No hay imagen seleccionada' }}</div>
+            <div class="size"><b>Tamaño: </b>{{ (image_op)?image_op.SIZE+'Kb':'No hay imagen seleccionada' }}</div>
+            <div class="mime"><b>Tipo: </b>{{ (image_op)?image_op.MIME:'No hay imagen seleccionada' }}</div>
+          </div>
+        </div>
       </div>
       <div class="footer">
         <div class="paginator">

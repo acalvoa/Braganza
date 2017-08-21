@@ -13,12 +13,22 @@ module.exports = {
 	  		primaryKey: true,
 	  		autoIncrement: true
   		},
-  		MIME:{
-  			type: 'string'
-  		},
+  		DATA:{
+        type: 'binary'
+      },
+      MIME:{
+        type: 'string'
+      },
+      NAME:{
+        type: 'string'
+      },
+      SIZE:{
+        type: 'integer',
+      },
 	    toJSON: function () {
 	        var obj = this.toObject();
-	        delete obj.createdAt;
+	        delete obj.DATA;
+          delete obj.createdAt;
 	        delete obj.updatedAt;
 	        return obj;
 	    }

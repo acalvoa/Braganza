@@ -16,10 +16,11 @@ export class ImagesComponent {
   private view:string = 'showcase';
   private show:boolean = false;
   private image_op:string;
-  private images:string[] = ['1','1','1','1','1','1','1'];
-  private image_showcase:string[] = ['1','1','1','1','1','1','1'];
-  private pages:number[] = [1,2,3,4,5];
+  private images:string[] = [];
+  private image_showcase:string[] = [];
+  private pages:number[] = [];
   private page_selected:number = 1;
+  private api:string;
   //asddasdasdas
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
@@ -27,10 +28,31 @@ export class ImagesComponent {
   dragOver: boolean;
   constructor(private image_service:ImagesService, private alert:AlertService) {
     this.image_service.registerLoading(this);
+    this.api = Config.API;
     this.files = []; // local uploading files array
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
+    this.fetchImages();
 	}
+  private fetchImages(){
+    this.image_service.getList().subscribe(
+      data => {
+        this.images = data.IMAGES;
+        this.orderImages();
+      },
+      error => {
+        this.alert.warning(error);
+      });
+  }
+  private orderImages(){
+    var pages = Math.ceil(this.images.length/16);
+    this.pages = [];
+    for(let i=0; i<pages; i++){
+      this.pages.push((i+1));
+    }
+    this.image_showcase = this.images.slice(0,16);
+    this.page_selected = 1;
+  }
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') { // when all files added in queue
       // uncomment this if you want to auto upload files when added
@@ -58,7 +80,9 @@ export class ImagesComponent {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'done') {
-      console.log(output);
+      this.images.push(output.file.response.IMAGE);
+      this.orderImages();
+      this.view = 'showcase';
     }
   }
   startUpload(): void {
@@ -89,6 +113,7 @@ export class ImagesComponent {
   }
   private paginator(num:number){
     this.page_selected = num;
+    this.image_showcase = this.images.slice(16*(num-1),16*(num));
   }
   private select_image(image:string){
     this.image_op = image;

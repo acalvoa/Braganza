@@ -70,6 +70,16 @@ export class RestService {
 			return response;
 		});
 	}
+	public getSilent(uri:string) {
+		let header = this.createHeaders();
+		return this.http.get(Config.API+uri, {
+	      	headers: header,
+	      	withCredentials: true
+	    }).map((res:Response) => {
+			let response = res.json();
+			return response;
+		});
+	}
 	public getMap(uri:string) {
 		let header = this.createHeaders();
 		return this.http.get(Config.API+uri, {

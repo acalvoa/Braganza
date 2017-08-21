@@ -7,6 +7,9 @@ import { ProductosComponent } from './productos/productos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 // import { ConfiguracionesComponent } from './productos/productos.component';
 import { VitrinaComponent } from './vitrina/vitrina.component';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { TemplatesComponent } from './templates/templates.component';
+
 
 export const FeaturesRoutes: Route[] = [
   {
@@ -20,15 +23,23 @@ export const FeaturesRoutes: Route[] = [
     children: [
       {
         path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'productos/catalogo',
         component: ProductosComponent
       },
       {
-        path: 'productos',
-        component: ProductosComponent
-      },
-      {
-        path: 'vitrina',
+        path: 'productos/vitrina',
         component: VitrinaComponent
+      },
+      {
+        path: 'productos/categorias',
+        component: CategoriasComponent
+      },
+      {
+        path: 'productos/templates',
+        component: TemplatesComponent
       }
     ],
     canActivate: [GuardService]

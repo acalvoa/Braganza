@@ -11,6 +11,8 @@ import { ProductosComponent } from './productos/productos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VitrinaComponent } from './vitrina/vitrina.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { TemplatesComponent } from './templates/templates.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -18,9 +20,10 @@ import { PipesModule } from '../pipes/pipes.module';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, SharedModule],
   declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
-  VitrinaComponent],
+  VitrinaComponent, CategoriasComponent, TemplatesComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,
-  AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent]
+  AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent, CategoriasComponent,
+  TemplatesComponent]
 })
 export class FeaturesModule {
 }

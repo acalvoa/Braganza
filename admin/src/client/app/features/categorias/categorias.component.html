@@ -1,0 +1,56 @@
+<div class="content">
+	<div class="card categorias" *ngIf="view=='showcase'">
+		<div class="card-header text-white bg-primary header">
+			<div class="title">Categorias</div>
+			<div class="search">
+				<div class="add"><button class="btn btn-success" (click)="createCategory()">Agregar</button></div>
+				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador"/></div>
+			</div>
+		</div>
+		<div class="card-block body">
+		    <div class="category" *ngFor="let category of categorias" [style.background-image]="'url('+ (category.image.ID_IMAGE | image) + ')'"></div>
+		    <div class="category_add" (click)="createCategory()"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Categoria</div>
+		</div>
+	</div>
+	<div class="create" *ngIf="view=='create'">
+		<form (submit)="addCategory($event,name.value,description.value)" ngNativeValidate>
+			<div class="card categorias_create">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Crear nueva categoria</div>
+				</div>
+				<div class="card-block body">
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Nombre</label>
+					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre de la categoria" value="" required #name>
+					    <small id="name_help" class="form-text text-muted">Nombre descriptivo de la categoria.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="category_description">Descripción</label>
+					    <textarea class="form-control" name="description" id="description_category" aria-describedby="description_help" placeholder="Defina la descripción de la categoria" required #description></textarea> 
+				    	<small id="description_help" class="form-text text-muted">Descripción de la categoria.</small>
+				  	</div>	
+				  	<div class="form-group">
+					    <label for="category_image">Imagen de la categoria</label>
+					    <div class="images">
+					    	<div class="add_image" *ngIf="!categoria.image" (click)="selectImage()"><i class="fa fa-file-image-o" aria-hidden="true"></i> Cargar Archivo</div>
+					    	<div class="add_image" *ngIf="categoria.image" [style.background-image]="'url('+(categoria.image.ID_IMAGE | image)+')'" #image_obj
+					    	(mouseenter)="image_obj.delete=true" (mouseleave)="image_obj.delete=false">
+					    		<div class="cerrar" *ngIf="image_obj.delete" (click)="deleteImg()"><i class="fa fa-times" aria-hidden="true"></i></div>
+					    	</div>
+					    </div>
+				    	<small id="image_help" class="form-text text-muted">Descripción de la categoria.</small>
+				  	</div>					
+				</div>
+			</div>
+			<div class="card categorias_create_actions">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Acciones</div>
+				</div>
+				<div class="card-block body">
+					<button type="submit" class="btn btn-success">Agregar</button>
+					<button (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

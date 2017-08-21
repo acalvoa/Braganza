@@ -21,6 +21,7 @@ export class ImagesComponent {
   private pages:number[] = [];
   private page_selected:number = 1;
   private api:string;
+  private callback:any;
   //asddasdasdas
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
@@ -34,6 +35,11 @@ export class ImagesComponent {
     this.humanizeBytes = humanizeBytes;
     this.fetchImages();
 	}
+  public show_container(callback:any){
+    this.show = true;
+    this.view = 'showcase';
+    this.callback = callback;
+  }
   private fetchImages(){
     this.image_service.getList().subscribe(
       data => {
@@ -53,7 +59,7 @@ export class ImagesComponent {
     this.image_showcase = this.images.slice(0,16);
     this.page_selected = 1;
   }
-  onUploadOutput(output: UploadOutput): void {
+  private onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') { // when all files added in queue
       // uncomment this if you want to auto upload files when added
       const event: UploadInput = {
@@ -85,7 +91,7 @@ export class ImagesComponent {
       this.view = 'showcase';
     }
   }
-  startUpload(): void {
+  private startUpload(): void {
     // const event: UploadInput = {
     //   type: 'uploadAll',
     //   url: 'http://ngx-uploader.com/upload',
@@ -97,15 +103,15 @@ export class ImagesComponent {
     // this.uploadInput.emit(event);
   }
 
-  cancelUpload(id: string): void {
+  private cancelUpload(id: string): void {
     this.uploadInput.emit({ type: 'cancel', id: id });
   }
 
-  removeFile(id: string): void {
+  private removeFile(id: string): void {
     this.uploadInput.emit({ type: 'remove', id: id });
   }
 
-  removeAllFiles(): void {
+  private removeAllFiles(): void {
     this.uploadInput.emit({ type: 'removeAll' });
   }
   private toggleview(){
@@ -117,5 +123,20 @@ export class ImagesComponent {
   }
   private select_image(image:string){
     this.image_op = image;
+  }
+  private pick(){
+    if(!this.callback){
+      this.alert.error("Error: No se encuentra asignado un callback");
+      return;
+    }
+    if(!this.image_op){
+      this.alert.warning("Debe seleccionar una fotografia");
+    }
+    else{
+      this.callback(this.image_op);
+      this.callback = null;
+      this.image_op = null;
+      this.show = false;
+    }
   }
 }

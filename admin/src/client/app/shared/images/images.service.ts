@@ -18,4 +18,7 @@ export class ImagesService {
     public getList(){
      	return this.rest.getSilent('/images/list');
     }
+    public show(callback:any){
+    	this.image.show_container(callback);
+    }
 }

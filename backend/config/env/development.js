@@ -18,7 +18,7 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'mysql_localhost'
+    connection: 'mysql_develop'
   }
 
 };

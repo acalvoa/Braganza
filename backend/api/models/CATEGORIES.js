@@ -20,13 +20,18 @@ module.exports = {
   			type: 'text'
   		},
       IMAGE:{
-        model: 'IMAGES'
+        model: 'CATEGORIES_X_PHOTO'
       },
   		PRODUCTS:{
   			model: 'PRODUCTS'
-  		}
+  		},
+      toJSON: function () {
+          var obj = this.toObject();
+          delete obj.createdAt;
+          delete obj.updatedAt;
+          return obj;
+      }
   	},
   	autoPK: false,
     tableName: 'CATEGORIES'
 };
-

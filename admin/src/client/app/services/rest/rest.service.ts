@@ -14,7 +14,6 @@ export class RestService {
 	}
 	public post(data:any, uri:string) {
 		let body:string = '';
-		if(this.blackscreen) this.blackscreen.show('Cargando...','rest-service');
 		for(let key in data){
 			if(data[key] == 0 || (data[key] != null && data[key] != '')){
 				if(typeof data[key] == 'object') data[key] = JSON.stringify(data[key]);
@@ -28,7 +27,6 @@ export class RestService {
 	      	withCredentials: true
 	    }).map((res:Response) => {
 			let response = res.json();
-			this.blackscreen.hide('rest-service');
 			return response;
 		});
 	}
@@ -38,7 +36,6 @@ export class RestService {
 	      	withCredentials: true
 	    }).map((res:Response) => {
 			let response = res.json();
-			this.blackscreen.hide('rest-service');
 			return response;
 		});
 	}
@@ -60,13 +57,11 @@ export class RestService {
 	// FOR JWT IMPLEMENTATION (FUTURE)
 	public get(uri:string) {
 		let header = this.createHeaders();
-		if(this.blackscreen) this.blackscreen.show('Cargando...','rest-service');
 		return this.http.get(Config.API+uri, {
 	      	headers: header,
 	      	withCredentials: true
 	    }).map((res:Response) => {
 			let response = res.json();
-			this.blackscreen.hide('rest-service');
 			return response;
 		});
 	}
@@ -80,6 +75,13 @@ export class RestService {
 			return response;
 		});
 	}
+	public getMapSilent(uri:string) {
+		let header = this.createHeaders();
+		return this.http.get(Config.API+uri, {
+	      	headers: header,
+	      	withCredentials: true
+	    });
+	}
 	public getMap(uri:string) {
 		let header = this.createHeaders();
 		return this.http.get(Config.API+uri, {
@@ -91,19 +93,16 @@ export class RestService {
 		});
 	}
 	public delete(id:number,uri:string) {
-		if(this.blackscreen) this.blackscreen.show('Cargando...','rest-service');
 		let header = this.createHeaders();
 		return this.http.delete(Config.API+uri+'/'+id, {
 	      	headers: header,
 	      	withCredentials: true
 	    }).map((res:Response) => {
 			let response = res.json();
-			this.blackscreen.hide('rest-service');
 			return response;
 		});
 	}
 	public put(id:number,uri:string, data:any) {
-		if(this.blackscreen) this.blackscreen.show('Cargando...','rest-service');
 		let body:string = '';
 		for(let key in data){
 			if(data[key] == 0 || (data[key] != null && data[key] != '')){
@@ -118,7 +117,6 @@ export class RestService {
 	      	withCredentials: true
 	    }).map((res:Response) => {
 			let response = res.json();
-			this.blackscreen.hide('rest-service');
 			return response;
 		});
 	}

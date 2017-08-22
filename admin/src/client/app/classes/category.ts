@@ -1,6 +1,7 @@
 import { Image } from './image';
 export class Category{
-	public name:string;
-	public description:string;
-	public image:Image;
+	public NAME:string;
+	public DESCRIPTION:string;
+	public IMAGE:Image;
+
 }

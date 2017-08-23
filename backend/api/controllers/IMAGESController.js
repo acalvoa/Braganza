@@ -98,9 +98,13 @@ module.exports = {
 						res.header('Expires', '31 Dic 2017 00:00:00 GMT');
 						return res.send(image.DATA);
 					}
-					return res.notFound({
-						RESPONSE:404
-					});
+					else
+					{
+						return res.notFound({
+							RESPONSE:404
+						});
+					}
+					
 				} catch(err) {
 					return res.json({
 						RESPONSE:500,

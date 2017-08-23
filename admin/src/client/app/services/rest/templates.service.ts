@@ -4,38 +4,37 @@ import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { RestService } from './rest.service';
-import { Category } from '../../classes/category'; 
+import { Template } from '../../classes/template'; 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CategoriasService {
-	private categorias:Category[];
+export class TemplatesService {
+	private templates:Template[];
 	//construimos los metodos
 	constructor(@Inject (RestService) private rest:RestService) {
-		this.categorias = null;
+		this.templates = null;
 	}
-	public getCategories(){
-		if(this.categorias == null){
-			return this.rest.getMapSilent('/categories').map((res:Response) => {
+	public getTemplates(){
+		if(this.templates == null){
+			return this.rest.getMapSilent('/templates').map((res:Response) => {
 				let response = res.json();
-				this.categorias = response;
+				this.templates = response;
 				return response;
 			});
 		}
 		return new Observable(observer => {
-	          observer.next(this.categorias);
+	          observer.next(this.templates);
 	          observer.complete();
 	    });
 	}
-	public addCategory(category:Category){
+	public addTemplate(template:Template){
 		return new Observable(observer => {
 	        this.rest.post({
-	        	name: category.NAME,
-	        	description: category.DESCRIPTION,
-	        	image: category.IMAGE.ID_IMAGE
-	        },'/categories').subscribe(
+	        	name: template.NAME,
+	        	fields: JSON.stringify(template.FIELDS)
+	        },'/templates').subscribe(
 	          	data => {
-	          		this.categorias.push(data);
+	          		this.templates.push(data);
 	          		observer.next(data);
 	          		observer.complete();
 	          	},
@@ -45,18 +44,17 @@ export class CategoriasService {
 	        );
 	    });
 	}
-	public editCategory(category:Category){
+	public editTemplate(template:Template){
 		return new Observable(observer => {
 	        this.rest.post({
-	        	id: category.ID_CATEGORY,
-	        	name: category.NAME,
-	        	description: category.DESCRIPTION,
-	        	image: category.IMAGE.ID_IMAGE
-	        },'/categories/edit').subscribe(
+	        	id: template.ID_PRODUCT_TEMPLATE,
+	        	name: template.NAME,
+	        	fields: JSON.stringify(template.FIELDS)
+	        },'/templates/edit').subscribe(
 	          	data => {
-	          		for(let i=0; i<this.categorias.length;i++){
-			            if(this.categorias[i].ID_CATEGORY == data.ID_CATEGORY){
-			              this.categorias[i] = data;
+	          		for(let i=0; i<this.templates.length;i++){
+			            if(this.templates[i].ID_PRODUCT_TEMPLATE == data.ID_PRODUCT_TEMPLATE){
+			              this.templates[i] = data;
 			            }
 			        }
 	          		observer.next(data);
@@ -68,11 +66,11 @@ export class CategoriasService {
 	        );
 	    });
 	}
-	public deleteCategory(category:Category){
+	public deleteTemplate(template:Template){
 		return new Observable(observer => {
-	        this.rest.delete(category.ID_CATEGORY, '/categories').subscribe(
+	        this.rest.delete(template.ID_PRODUCT_TEMPLATE, '/templates').subscribe(
 	          	data => {
-	          		this.categorias.splice(this.categorias.indexOf(category),1);
+	          		this.templates.splice(this.templates.indexOf(template),1);
 	          		observer.next(data);
 	          		observer.complete();
 	          	},

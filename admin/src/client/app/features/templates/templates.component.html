@@ -1,14 +1,85 @@
 <div class="content">
-	<div class="card productos">
-		<div class="card-header card-primary header">
-			<div class="title">Productos</div>
+	<div class="card templates" *ngIf="view=='showcase'">
+		<div class="card-header text-white bg-primary header">
+			<div class="title">Templates</div>
 			<div class="search">
-				<div class="add"><button class="btn btn-success">Agregar</button></div>
+				<div class="add"><button class="btn btn-success" (click)="createTemplate()">Agregar</button></div>
 				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador"/></div>
 			</div>
 		</div>
 		<div class="card-block body">
-		    <div class="product"></div>
+		    <table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th>#</th>
+			      <th>Nombre Template</th>
+			      <th>Campos</th>
+			      <th>Productos</th>
+			      <th>Acciones</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let template of templates_showcase | keys">
+			      <th scope="row">{{ template.key }}</th>
+			      <td>{{ template.value.NAME }}</td>
+			      <td>{{ template.value.FIELDS.length }}</td>
+			      <td></td>
+			      <th>
+			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editTemplate(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(template)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			      </th>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
+	</div>
+	<div class="create" *ngIf="view=='create' || view=='edit'">
+		<form (submit)="addTemplate($event,name.value)" ngNativeValidate>
+			<div class="card templates_create">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Crear un nuevo template</div>
+					<div class="addsection">
+						<div class="add"><button type="button" class="btn btn-primary" (click)="createField()">Agregar Campo</button></div>
+					</div>
+				</div>
+				<div class="card-block body">
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Nombre</label>
+					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre del template" value="" required [value]="(template.NAME)?template.NAME:''" #name>
+					    <small id="name_help" class="form-text text-muted">Nombre descriptivo del template.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="category_description">Campos del template</label>
+				    	<small id="description_help" class="form-text text-muted">Campos adicionales que tendra este tipo de producto, puede ser texto, numero o fecha.</small>
+				    	<div class="fields">
+					    	<div class="field form-inline" *ngFor="let field of template.FIELDS | keys">
+					    		<div class="form-group field-detail">
+								    <label for="exampleInputEmail1"><b>Nombre: </b></label>
+								    <input type="text" class="form-control" [name]="'name_field_'+field.key" [id]="'name_field_'+field.key"  placeholder="Nombre del campo" value="" required [value]="(field.value.NAME)?field.value.NAME:''" #name>
+							  	</div>
+							  	<div class="form-group field-detail">
+								    <label for="exampleInputEmail1"><b>Tipo: </b></label>
+								    <select [value]="field.value.TYPE">
+								    	<option value="string">Texto</option>
+								    	<option value="number">Numero</option>
+								    	<option value="date">Fecha</option>
+								    </select>
+							  	</div>
+					    	</div>
+					    </div>
+				  	</div>	
+				</div>
+			</div>
+			<div class="card templates_create_actions">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Acciones</div>
+				</div>
+				<div class="card-block body">
+					<button type="submit" class="btn btn-success" *ngIf="view=='create'">Agregar</button>
+					<button type="submit" class="btn btn-success" *ngIf="view=='edit'">Editar</button>
+					<button (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>

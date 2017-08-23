@@ -12,7 +12,8 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   	private sidebar:boolean = false;
   	constructor() {
-    
+      this.templates = [];
+      this.fetch();
   	}
   	hideSiderbar(){
   		this.sidebar = !this.sidebar;

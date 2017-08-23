@@ -38,7 +38,11 @@ module.exports.routes = {
   '/admin/me': 'ADMINSController.me',
   '/admin/login': 'ADMINSController.login',
   '/image/list': 'IMAGESController.list',
-  '/image/:IMAGE': 'IMAGESController.getImage'
+  '/image/:IMAGE': 'IMAGESController.getImage',
+  '/categories/edit': 'CATEGORIESController.edit',
+  '/templates': 'PRODUCT_TEMPLATEController',
+  '/templates/edit': 'PRODUCT_TEMPLATEController.edit',
+
 
 
   /***************************************************************************

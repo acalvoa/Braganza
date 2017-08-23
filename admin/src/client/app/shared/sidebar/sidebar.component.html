@@ -3,18 +3,16 @@
 	<div class="itemmenu" #menu>
 		<div class="title" (click)="menu.active = !menu.active" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Productos</div>
 		<div class="items" *ngIf="menu.active">
-			<div class="item" [routerLink]="['/productos/catalogo']" [routerLinkActive]="['router-link-active']"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Catalogo</div>
+			<div class="item" [routerLink]="['/productos/catalogo']" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Catalogo</div>
 			<div class="item" [routerLink]="['/productos/vitrina']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Vitrina</div>
-			<div class="item" [routerLink]="['/productos/categorias']" [routerLinkActive]="['router-link-active']"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Categorias</div>
-			<div class="item" [routerLink]="['/productos/templates']" [routerLinkActive]="['router-link-active']"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Templates</div>
+			<div class="item" [routerLink]="['/productos/categorias']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Categorias</div>
+			<div class="item" [routerLink]="['/productos/templates']" [routerLinkActive]="['router-link-active']"><i class="fa fa-file-archive-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Templates</div>
 		</div>
 	</div>
-	<div class="item" [routerLink]="['/vitrina']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Vitrina</div>
 	<div class="item" [routerLink]="['/configuraciones']" [routerLinkActive]="['router-link-active']"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Configuraciones</div>
 </div>
 <div class="sidebarmini" *ngIf="hidden">
 	<div class="item" [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" placement="right" ngbTooltip="Dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i></div>
 	<div class="item" [routerLink]="['/properties']" [routerLinkActive]="['router-link-active']" placement="right" ngbTooltip="Productos"><i class="fa fa-sticky-note-o" aria-hidden="true"></i></div>
-	<div class="item" [routerLink]="['/logs']" [routerLinkActive]="['router-link-active']" placement="right" ngbTooltip="Vitrina"><i class="fa fa-bookmark" aria-hidden="true"></i></div>
 	<div class="item" [routerLink]="['/configuraciones']" [routerLinkActive]="['router-link-active']" placement="right" ngbTooltip="Configuraciones"><i class="fa fa-cog" aria-hidden="true"></i></div>
 </div>

@@ -5,11 +5,11 @@
 				<div class="title">Categorias</div>
 				<div class="search">
 					<div class="add"><button class="btn btn-success" (click)="createCategory()">Agregar</button></div>
-					<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador"/></div>
+					<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
 				</div>
 			</div>
 			<div class="card-block body">
-			    <div class="category" *ngFor="let category of categorias">
+			    <div class="category" *ngFor="let category of categorias_showcase" (click)="selectCategory(category)">
 			    	<div class="img_obj" [style.background-image]="'url('+ (category.IMAGE.ID_IMAGE | image) + ')'"></div>
 			    	<div class="label_obj">{{ category.NAME }}</div>
 			    </div>
@@ -21,11 +21,20 @@
 				<div class="title">Detalle</div>
 			</div>
 			<div class="card-block body">
-			    
+			    <div class="category_selected">
+			    	<div class="img_obj" [style.background-image]="(selected_category)?'url('+ (selected_category.IMAGE.ID_IMAGE | image) + ')':''"></div>
+			    	<div class="label_obj">{{ (selected_category)?selected_category.NAME:'' }}</div>
+			    </div>
+			    <div class="tools" *ngIf="selected_category">
+			    	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editCategory(selected_category)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(selected_category)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-primary" placement="top" ngbTooltip="Deseleccionar" (click)="clean()"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+			    </div>
+			    <div class="detalle" *ngIf="selected_category">{{ selected_category.DESCRIPTION }}</div>
 			</div>
 		</div>
 	</div>
-	<div class="create" *ngIf="view=='create'">
+	<div class="create" *ngIf="view=='create' || view=='edit'">
 		<form (submit)="addCategory($event,name.value,description.value)" ngNativeValidate>
 			<div class="card categorias_create">
 				<div class="card-header text-white bg-success header">
@@ -34,12 +43,12 @@
 				<div class="card-block body">
 				  	<div class="form-group">
 					    <label for="exampleInputEmail1">Nombre</label>
-					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre de la categoria" value="" required #name>
+					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre de la categoria" value="" required [value]="(categoria.NAME)?categoria.NAME:''" #name>
 					    <small id="name_help" class="form-text text-muted">Nombre descriptivo de la categoria.</small>
 				  	</div>
 				  	<div class="form-group">
 					    <label for="category_description">Descripción</label>
-					    <textarea class="form-control" name="description" id="description_category" aria-describedby="description_help" placeholder="Defina la descripción de la categoria" required #description></textarea> 
+					    <textarea class="form-control" name="description" id="description_category" aria-describedby="description_help" placeholder="Defina la descripción de la categoria" required [value]="(categoria.DESCRIPTION)?categoria.DESCRIPTION:''" #description></textarea> 
 				    	<small id="description_help" class="form-text text-muted">Descripción de la categoria.</small>
 				  	</div>	
 				  	<div class="form-group">
@@ -60,7 +69,8 @@
 					<div class="title">Acciones</div>
 				</div>
 				<div class="card-block body">
-					<button type="submit" class="btn btn-success">Agregar</button>
+					<button type="submit" class="btn btn-success" *ngIf="view=='create'">Agregar</button>
+					<button type="submit" class="btn btn-success" *ngIf="view=='edit'">Editar</button>
 					<button (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
 				</div>
 			</div>

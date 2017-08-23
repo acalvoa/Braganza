@@ -3,8 +3,8 @@
 }
 .content{
   padding:20px;
-  .productos{
-    width:70%;
+  .templates{
+    width:100%;
     .header{
       color: #FFF;
       font-size: 1rem;
@@ -50,4 +50,75 @@
       }
     }
   }
+  .create{
+      display:flex;
+      flex-direction:row;
+      height:100%;
+      .header{
+        color: #FFF;
+        font-size: 1rem;
+        font-weight: bold;
+        display:flex;
+        flex-direction:row;
+        .addsection{
+          display:flex;
+          flex:1;
+          justify-content:flex-end;
+          .add{
+            margin-right:20px;
+            button{
+              height: 30px;
+              align-items:center;
+              padding-top:5px;
+              align-content:center;
+            }
+          }
+        }
+      }
+      form{
+        display:flex;
+        height:100%;
+        width:100%;
+        flex-direction:row;
+        .templates_create{
+          width:80%;
+          .body{
+            padding: 20px;
+            .fields{
+              padding:10px 0px;
+              .field{
+                display:flex;
+                flex-direction:row;
+                margin: 10px 0px;
+                label{
+                  margin-right:10px;
+                }
+                select{
+                  height:40px;
+                  border: 1px solid #CCC;
+                  border-radius:3px;
+                  width:200px;
+                }
+                .field-detail{
+                  margin-left:10px;
+                }
+              }
+            }
+          }
+        }
+        .templates_create_actions{
+          width: calc(20% - 20px);
+          margin-left: 20px;
+          .body{
+            padding: 20px;
+            button{
+              width:80%;
+              margin-bottom:10px;
+              color: #FFF;
+            }
+          }
+        } 
+      }
+      
+    }
 }

@@ -150,7 +150,7 @@
     "@angular/platform-browser-dynamic": "^4.3.0",
     "@angular/router": "^4.3.0",
     "@angular/service-worker": "^1.0.0-beta.16",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.29",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.1",
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "ng2-ui-auth": "^7.0.2",

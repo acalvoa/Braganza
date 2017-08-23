@@ -111,7 +111,7 @@ export class CategoriasComponent {
   private search_hide(element:any){
     element.value = '';
   }
-  searchby(value:string){
+  private searchby(value:string){
     this.categorias_showcase = [];
     if(value==''){
       this.categorias_showcase = this.categorias;

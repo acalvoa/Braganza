@@ -9,4 +9,9 @@ export class Template{
 	public addField(){
 		this.FIELDS.push((new Field()));
 	}
+	public parse(template:Template){
+		this.ID_PRODUCT_TEMPLATE = template.ID_PRODUCT_TEMPLATE;
+		this.NAME = template.NAME;
+		this.FIELDS = template.FIELDS;
+	}
 }

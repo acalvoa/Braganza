@@ -1,7 +1,20 @@
 import { Category } from './category';
+import { Field } from './field';
+import { Template } from './template';
+import { Image } from './image';
 
 export class Product{
-	public name:string;
-	public description:string;
-	public categories:Category[];
+	public ID_PRODUCT:number;
+	public NAME:string;
+	public DESCRIPTION:string;
+	public TEMPLATE:Template;
+	public FIELDS:Field[];
+	public CATEGORIES:Category[];
+	public IMAGES:Image[];
+	constructor(){
+		this.TEMPLATE = new Template();
+		this.FIELDS = [];
+		this.CATEGORIES = [];
+		this.IMAGES = [];
+	}
 }

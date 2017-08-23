@@ -16,7 +16,7 @@ export class TemplatesService {
 	}
 	public getTemplates(){
 		if(this.templates == null){
-			return this.rest.getMapSilent('/templates').map((res:Response) => {
+			return this.rest.getMapSilent('/product_template').map((res:Response) => {
 				let response = res.json();
 				this.templates = response;
 				return response;
@@ -32,7 +32,7 @@ export class TemplatesService {
 	        this.rest.post({
 	        	name: template.NAME,
 	        	fields: JSON.stringify(template.FIELDS)
-	        },'/templates').subscribe(
+	        },'/product_template').subscribe(
 	          	data => {
 	          		this.templates.push(data);
 	          		observer.next(data);
@@ -50,7 +50,7 @@ export class TemplatesService {
 	        	id: template.ID_PRODUCT_TEMPLATE,
 	        	name: template.NAME,
 	        	fields: JSON.stringify(template.FIELDS)
-	        },'/templates/edit').subscribe(
+	        },'/product_template/edit').subscribe(
 	          	data => {
 	          		for(let i=0; i<this.templates.length;i++){
 			            if(this.templates[i].ID_PRODUCT_TEMPLATE == data.ID_PRODUCT_TEMPLATE){
@@ -68,7 +68,7 @@ export class TemplatesService {
 	}
 	public deleteTemplate(template:Template){
 		return new Observable(observer => {
-	        this.rest.delete(template.ID_PRODUCT_TEMPLATE, '/templates').subscribe(
+	        this.rest.delete(template.ID_PRODUCT_TEMPLATE, '/product_template').subscribe(
 	          	data => {
 	          		this.templates.splice(this.templates.indexOf(template),1);
 	          		observer.next(data);

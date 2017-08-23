@@ -23,7 +23,8 @@ module.exports = {
         model: 'CATEGORIES_X_PHOTO'
       },
   		PRODUCTS:{
-  			model: 'PRODUCTS'
+  			collection: 'PRODUCTS',
+        via: 'CATEGORIES'
   		},
       toJSON: function () {
           var obj = this.toObject();

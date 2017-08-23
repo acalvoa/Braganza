@@ -35,7 +35,7 @@ export class TemplatesComponent {
 	}
 	private addTemplate(event:any, name:string){
 		event.preventDefault();
-		this.categoria.NAME = name;
+		this.template.NAME = name;
 	    if(this.view == 'create'){
 	      this.templates_service.addTemplate(this.template).subscribe(
 	        data => {
@@ -65,10 +65,23 @@ export class TemplatesComponent {
 	    }
 	} 
 	private editTemplate(template:Template){
-
+		this.template = new Template();
+		this.template.parse(template);
+    	this.view = 'edit';
 	}
 	private delete(template:Template){
-		
+		this.templates_service.deleteTemplate(template).subscribe(
+	      data => {        
+	        this.template = null;
+	        this.view = 'showcase';
+	      },
+	      error => {
+	        this.alert.error(error);
+	      }
+	    );
+	}
+	private changeType(value:string, i:number){
+		this.template.FIELDS[i].TYPE = value;
 	}
 	private createTemplate(){
 		this.template = new Template();
@@ -76,5 +89,22 @@ export class TemplatesComponent {
 	}
 	private createField(){
 		this.template.addField();
+	}
+	private search_hide(element:any){
+	    element.value = '';
+	}
+	private searchby(value:string){
+	    this.templates_showcase = [];
+	    if(value==''){
+	      this.templates_showcase = this.templates;
+	    }
+	    else
+	    {
+	      for(let i=0;i<this.templates.length;i++){
+	        if(this.templates[i].NAME.toUpperCase().search(value.toUpperCase()) != -1){
+	          this.templates_showcase.push(this.templates[i]);
+	        }
+	      }
+	    }
 	}
 }

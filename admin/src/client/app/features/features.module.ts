@@ -18,7 +18,7 @@ import { TemplatesComponent } from './templates/templates.component';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgbModule, SharedModule],
+  imports: [CommonModule, RouterModule, NgbModule, SharedModule, FormsModule],
   declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
   VitrinaComponent, CategoriasComponent, TemplatesComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,

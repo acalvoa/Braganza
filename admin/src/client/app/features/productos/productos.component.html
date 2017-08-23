@@ -1,14 +1,115 @@
 <div class="content">
-	<div class="card productos">
-		<div class="card-header card-primary header">
-			<div class="title">Productos</div>
-			<div class="search">
-				<div class="add"><button class="btn btn-success">Agregar</button></div>
-				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador"/></div>
+	<div class="productos" *ngIf="view=='showcase'">
+		<div class=" card showcase">
+			<div class="card-header text-white bg-primary header">
+				<div class="title">Productos</div>
+				<div class="search">
+					<div class="add"><button class="btn btn-success" (click)="createProducto()">Agregar</button></div>
+					<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
+				</div>
+			</div>
+			<div class="card-block body">
+			    <div class="producto" *ngFor="let product of productos_showcase" (click)="selectProducto(product)">
+			    	<div class="img_obj" [style.background-image]="(product.IMAGES[0])?'url('+ (product.IMAGES[0].ID_IMAGE | image) + ')':''"></div>
+			    	<div class="label_obj">{{ product.NAME }}</div>
+			    </div>
+			    <div class="producto_add" (click)="createProducto()"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Producto</div>
 			</div>
 		</div>
-		<div class="card-block body">
-		    <div class="product"></div>
+		<div class="card detail">
+			<div class="card-header text-white bg-primary header">
+				<div class="title">Detalle</div>
+			</div>
+			<div class="card-block body">
+			    <div class="producto_selected">
+			    	<div class="img_obj" [style.background-image]="(selected_producto)?'url('+ (selected_producto.IMAGE.ID_IMAGE | image) + ')':''"></div>
+			    	<div class="label_obj">{{ (selected_producto)?selected_producto.NAME:'' }}</div>
+			    </div>
+			    <div class="tools" *ngIf="selected_producto">
+			    	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editProducto(selected_producto)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(selected_producto)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-primary" placement="top" ngbTooltip="Deseleccionar" (click)="clean()"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+			    </div>
+			    <div class="detalle" *ngIf="selected_producto">{{ selected_producto.DESCRIPTION }}</div>
+			</div>
 		</div>
+	</div>
+	<div class="create" *ngIf="view=='create' || view=='edit'">
+		<form (submit)="addProducto($event,name.value,description.value)" ngNativeValidate>
+			<div class="card productos_create">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Crear nuevo producto</div>
+				</div>
+				<div class="card-block body">
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Nombre</label>
+					    <input type="text" class="form-control" name="name" id="name_producto" aria-describedby="name_help" placeholder="Nombre del producto" value="" required [value]="(producto.NAME)?producto.NAME:''" #name>
+					    <small id="name_help" class="form-text text-muted">Nombre descriptivo del producto.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="producto_description">Descripción</label>
+					    <textarea class="form-control" name="description" id="description_producto" aria-describedby="description_help" placeholder="Defina la descripción del producto" required [value]="(producto.DESCRIPTION)?producto.DESCRIPTION:''" #description></textarea> 
+				    	<small id="description_help" class="form-text text-muted">Descripción del producto.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="producto_description">Categorias</label>
+					    <small id="description_help" class="form-text text-muted">Categorias asociadas al producto.</small>
+					    <div class="category_selector">
+					    	 <select class="form-control" #categoria>
+						    	<option value="-1">Seleccione una categoria</option>
+						    	<option *ngFor="let categoria of categorias; let i = index" [value]="i">{{ categoria.NAME }}</option>
+						    </select>
+						    <button type="button" class="btn btn-primary" (click)="addCategory(categoria.value)">Agregar</button>
+					    </div>
+				    	<div class="categories_list" *ngIf="producto.CATEGORIES.length > 0">
+				    		<div class="category" *ngFor="let category of producto.CATEGORIES" #cate_item (mouseenter)="cate_item.delete=true" (mouseleave)="cate_item.delete=false">
+				    			<div class="title" >{{ category.NAME }}</div>
+				    			<div class="delete" *ngIf="cate_item.delete" (click)="deleteCategory(category)"><i class="fa fa-times" aria-hidden="true"></i></div>
+				    		</div>
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="producto_description">Template</label>
+					    <select class="form-control" [value]="(producto.TEMPLATE.ID_PRODUCT_TEMPLATE)?producto.TEMPLATE.ID_PRODUCT_TEMPLATE:-1" (change)="changeTemplate(template.value)" #template>
+					    	<option value="-1">Seleccione un template</option>
+					    	<option *ngFor="let tem of templates" [value]="tem.ID_PRODUCT_TEMPLATE">{{ tem.NAME }}</option>
+					    </select> 
+				    	<small id="description_help" class="form-text text-muted">Template de molde del producto.</small>
+				  	</div>			
+				  	<div class="form-group">
+					    <label for="producto_image">Imagenes del producto</label>
+					    <div class="images">
+					    	<div class="add_image" *ngFor="let imagen of producto.IMAGES" [style.background-image]="'url('+(imagen.ID_IMAGE | image)+')'" #image_obj
+					    	(mouseenter)="image_obj.delete=true" (mouseleave)="image_obj.delete=false">
+					    		<div class="cerrar" *ngIf="image_obj.delete" (click)="deleteImg(imagen)"><i class="fa fa-times" aria-hidden="true"></i></div>
+					    	</div>
+					    	<div class="add_image" (click)="selectImage()"><i class="fa fa-file-image-o" aria-hidden="true"></i> Cargar Imagen</div>
+					    	
+					    </div>
+				    	<small id="image_help" class="form-text text-muted">Imagenes del producto.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="producto_image">Campos especificos del producto</label>
+					    <small id="image_help" class="form-text text-muted">Campos especificos definidos por el template del producto.</small>
+				  	</div>
+				  	<div class="form-group" *ngFor="let fi of producto.TEMPLATE.FIELDS; let i = index">
+					    <label for="exampleInputEmail1">{{ fi.NAME }}</label>
+					    <input type="text" *ngIf="fi.TYPE=='string'" class="form-control" [name]="'field_template_'+i" [id]="'field_template_'+i" [attr.placeholder]="fi.NAME" [value]="(fi.VALUE)?fi.VALUE:''" required #field [(ngModel)]="producto.FIELDS[i].VALUE">
+					    <input type="number" *ngIf="fi.TYPE=='number'" class="form-control" [name]="'field_template_'+i" [id]="'field_template_'+i" [attr.placeholder]="fi.NAME" [value]="(fi.VALUE)?fi.VALUE:''" required #field [(ngModel)]="producto.FIELDS[i].VALUE">
+					    <input type="datetime" *ngIf="fi.TYPE=='date'" class="form-control" [name]="'field_template_'+i" [id]="'field_template_'+i" [attr.placeholder]="fi.NAME" [value]="(fi.VALUE)?fi.VALUE:''" required #field [(ngModel)]="producto.FIELDS[i].VALUE">
+				  	</div>		
+				</div>
+			</div>
+			<div class="card productos_create_actions">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Acciones</div>
+				</div>
+				<div class="card-block body">
+					<button type="submit" class="btn btn-success" *ngIf="view=='create'">Agregar</button>
+					<button type="submit" class="btn btn-success" *ngIf="view=='edit'">Editar</button>
+					<button (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>

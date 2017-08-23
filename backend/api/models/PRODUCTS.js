@@ -19,9 +19,20 @@ module.exports = {
   		DESCRIPTION:{
   			type: 'text'
   		},
+  		TEMPLATE:{
+  			model: 'PRODUCT_TEMPLATE'
+  		},
+  		FIELDS:{
+  			type: 'json'
+  		},
   		CATEGORIES: {
   			collection: 'CATEGORIES',
-  			via: 'PRODUCTS'
+  			via: 'PRODUCTS',
+  			dominant:true
+  		},
+  		IMAGES: {
+  			collection: 'PRODUCTS_X_PHOTO',
+  			via: 'PRODUCT'
   		}
   	},
   	autoPK: false,

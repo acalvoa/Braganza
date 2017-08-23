@@ -4,7 +4,7 @@
 			<div class="title">Templates</div>
 			<div class="search">
 				<div class="add"><button class="btn btn-success" (click)="createTemplate()">Agregar</button></div>
-				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador"/></div>
+				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
 			</div>
 		</div>
 		<div class="card-block body">
@@ -19,10 +19,10 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr *ngFor="let template of templates_showcase | keys">
-			      <th scope="row">{{ template.key }}</th>
-			      <td>{{ template.value.NAME }}</td>
-			      <td>{{ template.value.FIELDS.length }}</td>
+			    <tr *ngFor="let template of templates_showcase; let i = index">
+			      <td>{{ (i+1) }}</td>
+			      <td>{{ template.NAME }}</td>
+			      <td>{{ template.FIELDS.length }}</td>
 			      <td></td>
 			      <th>
 			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editTemplate(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
@@ -52,14 +52,14 @@
 					    <label for="category_description">Campos del template</label>
 				    	<small id="description_help" class="form-text text-muted">Campos adicionales que tendra este tipo de producto, puede ser texto, numero o fecha.</small>
 				    	<div class="fields">
-					    	<div class="field form-inline" *ngFor="let field of template.FIELDS | keys">
+					    	<div class="field form-inline" *ngFor="let fi of template.FIELDS; let i = index">
 					    		<div class="form-group field-detail">
 								    <label for="exampleInputEmail1"><b>Nombre: </b></label>
-								    <input type="text" class="form-control" [name]="'name_field_'+field.key" [id]="'name_field_'+field.key"  placeholder="Nombre del campo" value="" required [value]="(field.value.NAME)?field.value.NAME:''" #name>
+								    <input type="text" class="form-control" [name]="'name_field_'+i" [id]="'name_field_'+i"  [(ngModel)]="template.FIELDS[i].NAME" placeholder="Nombre del campo" value="" required [value]="(fi.NAME)?fi.NAME:''" #field>
 							  	</div>
 							  	<div class="form-group field-detail">
 								    <label for="exampleInputEmail1"><b>Tipo: </b></label>
-								    <select [value]="field.value.TYPE">
+								    <select [value]="fi.TYPE" (change)="changeType(type.value, i)" #type>
 								    	<option value="string">Texto</option>
 								    	<option value="number">Numero</option>
 								    	<option value="date">Fecha</option>
@@ -77,7 +77,7 @@
 				<div class="card-block body">
 					<button type="submit" class="btn btn-success" *ngIf="view=='create'">Agregar</button>
 					<button type="submit" class="btn btn-success" *ngIf="view=='edit'">Editar</button>
-					<button (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
+					<button type="button" (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
 				</div>
 			</div>
 		</form>

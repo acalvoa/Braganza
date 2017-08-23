@@ -40,8 +40,8 @@ module.exports.routes = {
   '/image/list': 'IMAGESController.list',
   '/image/:IMAGE': 'IMAGESController.getImage',
   '/categories/edit': 'CATEGORIESController.edit',
-  '/templates': 'PRODUCT_TEMPLATEController',
-  '/templates/edit': 'PRODUCT_TEMPLATEController.edit',
+  '/product_template/edit': 'PRODUCT_TEMPLATEController.edit',
+  '/products/edit': 'PRODUCTSController.edit',
 
 
 

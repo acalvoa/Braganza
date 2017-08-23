@@ -9,6 +9,7 @@ import { LoadingService } from './loading/loading.service';
 import { AlertService } from './alert/alert.service';
 import { CategoriasService } from './rest/categorias.service';
 import { TemplatesService } from './rest/templates.service';
+import { ProductosService } from './rest/productos.service';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -16,7 +17,8 @@ import { TemplatesService } from './rest/templates.service';
 @NgModule({
   imports: [],
   declarations: [],
-  providers: [RestService, UserService, GuardService, LoadingService, AlertService, CategoriasService, TemplatesService],
+  providers: [RestService, UserService, GuardService, LoadingService, AlertService, CategoriasService, TemplatesService,
+  ProductosService],
   exports: []
 })
 export class ServicesModule {

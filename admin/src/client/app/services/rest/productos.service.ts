@@ -33,6 +33,7 @@ export class ProductosService {
 	        	name: product.NAME,
 	        	description: product.DESCRIPTION,
 	        	images: JSON.stringify(product.IMAGES),
+	        	stock: product.STOCK,
 	        	categories: JSON.stringify(product.CATEGORIES),
 	        	template: product.TEMPLATE.ID_PRODUCT_TEMPLATE,
 	        	fields: JSON.stringify(product.FIELDS)
@@ -50,17 +51,23 @@ export class ProductosService {
 	}
 	public editProducto(product:Product){
 		return new Observable(observer => {
+			var images = [];
+			for(let i=0; i<product.IMAGES.length;i++){
+				images.push(product.IMAGES[i].ID_IMAGE);
+			}
 	        this.rest.post({
 	        	id: product.ID_PRODUCT,
 	        	name: product.NAME,
 	        	description: product.DESCRIPTION,
-	        	images: product.IMAGES,
-	        	template: product.TEMPLATE,
-	        	fields: product.FIELDS
+	        	images: images,
+	        	stock: product.STOCK,
+	        	categories: JSON.stringify(product.CATEGORIES),
+	        	template: product.TEMPLATE.ID_PRODUCT_TEMPLATE,
+	        	fields: JSON.stringify(product.FIELDS)
 	        },'/products/edit').subscribe(
 	          	data => {
 	          		for(let i=0; i<this.productos.length;i++){
-			            if(this.productos[i].ID_PRODUCT == data.ID_CATEGORY){
+			            if(this.productos[i].ID_PRODUCT == data.ID_PRODUCT){
 			              this.productos[i] = data;
 			            }
 			        }

@@ -22,7 +22,7 @@ module.exports = {
   		toJSON: function () {
 	        var obj = this.toObject();
 	        delete obj.PRODUCT;
-	        delete obj.ID_PHOTO;
+	        // delete obj.ID_PHOTO;
 	        obj.ID_IMAGE = obj.IMAGE;
 	        obj.NAME = '';
 	        obj.SIZE = '';

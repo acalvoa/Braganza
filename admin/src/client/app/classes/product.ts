@@ -8,6 +8,7 @@ export class Product{
 	public NAME:string;
 	public DESCRIPTION:string;
 	public TEMPLATE:Template;
+	public STOCK:number;
 	public FIELDS:Field[];
 	public CATEGORIES:Category[];
 	public IMAGES:Image[];

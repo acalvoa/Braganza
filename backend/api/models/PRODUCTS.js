@@ -19,6 +19,9 @@ module.exports = {
   		DESCRIPTION:{
   			type: 'text'
   		},
+  		STOCK:{
+  			type: 'integer'
+  		},
   		TEMPLATE:{
   			model: 'PRODUCT_TEMPLATE'
   		},

@@ -36,6 +36,7 @@ export class ProductosComponent {
 	private fetch(){
 		this.products_service.getProductos().subscribe(
 			data => {
+				console.log(this.productos);
 				this.productos = data;
 	      		this.productos_showcase = data;
 			},
@@ -60,10 +61,11 @@ export class ProductosComponent {
 			}
 		);
 	}
-	private addProducto(event:any, name:string, description:string){
+	private addProducto(event:any, name:string, description:string, stock:number){
 		event.preventDefault();
 		this.producto.NAME = name;
 		this.producto.DESCRIPTION = description;
+		this.producto.STOCK = stock;
 	    if(this.view == 'create'){
 	      this.products_service.addProducto(this.producto).subscribe(
 	        data => {
@@ -109,10 +111,10 @@ export class ProductosComponent {
 	private deleteImg(image:Image){
 		this.producto.IMAGES.splice(this.producto.IMAGES.indexOf(image),1);
 	}
-  	private selectCategory(producto:Product){
+  	private selectProducto(producto:Product){
     	this.selected_producto = producto;
   	}
-  	private editCategory(producto:Product){
+  	private editProducto(producto:Product){
 	    this.producto = producto;
 	    this.view = 'edit';
   	}

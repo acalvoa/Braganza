@@ -40,14 +40,15 @@ module.exports = {
 				var image_response = [];
 				for(i=0;i<image_obj.length;i++){
 					image_response.push({
-						ID_IMAGE:image_obj.IMAGE,
+						ID_IMAGE:image_obj[i].IMAGE,
 				        NAME:'',		
 				        SIZE:'',
 				        MIME:''
 					});
 				}
-				product.IMAGES = image_response;
-				return res.json(product);
+				var response = JSON.parse(JSON.stringify(product));
+				response.IMAGES = image_response;
+				return res.json(response);
 			});
 		});
 	},

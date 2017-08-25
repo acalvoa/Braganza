@@ -10,6 +10,7 @@ import { AlertService } from './alert/alert.service';
 import { CategoriasService } from './rest/categorias.service';
 import { TemplatesService } from './rest/templates.service';
 import { ProductosService } from './rest/productos.service';
+import { ShowcaseService } from './rest/showcase.service';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -18,7 +19,7 @@ import { ProductosService } from './rest/productos.service';
   imports: [],
   declarations: [],
   providers: [RestService, UserService, GuardService, LoadingService, AlertService, CategoriasService, TemplatesService,
-  ProductosService],
+  ProductosService, ShowcaseService],
   exports: []
 })
 export class ServicesModule {

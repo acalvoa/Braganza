@@ -1,10 +1,122 @@
 :host{
-	width:100%;
-	height: calc(100% - 60px);
+  width:100%;
 }
 .content{
-	display:flex;
-	flex-direction:row;
-	height:100%;
-	width:100%;
+  padding:20px;
+  .vitrina{
+    width:100%;
+    .header{
+      color: #FFF;
+      font-size: 1rem;
+      font-weight: bold;
+      display:flex;
+      flex-direction:row;
+      .title{
+        display:flex;
+        flex:1;
+        align-content:center;
+        align-items:center;
+      }
+      .search{
+        display:flex;
+        flex:1;
+        justify-content:flex-end;
+        .add{
+          margin-right:20px;
+          button{
+            height: 30px;
+            align-items:center;
+            padding-top:5px;
+            align-content:center;
+          }
+        }
+        .search_btn{
+          i{
+            font-size:1.2rem;
+          }
+          input{
+            margin-left: 10px;
+            height: 30px;
+          }
+        }
+      }
+    }
+    .body{
+      min-height:700px;
+      .product{
+        height:200px;
+        width:200px;
+        border: 1px solid #999;
+      }
+      td, .ind{
+        line-height:40px;
+        vertical-align:middle;
+      }
+    }
+  }
+  .create{
+      display:flex;
+      flex-direction:row;
+      height:100%;
+      .header{
+        color: #FFF;
+        font-size: 1rem;
+        font-weight: bold;
+        display:flex;
+        flex-direction:row;
+      }
+      form{
+        display:flex;
+        height:100%;
+        width:100%;
+        flex-direction:row;
+        .vitrina_create{
+          width:80%;
+          .body{
+            padding: 20px;
+            .stock_box{
+            	display:flex;
+            	flex-direction:row;
+            	button{
+            		width:200px;
+            		margin-left:10px;
+            	}
+            }
+            .fields{
+              padding:10px 0px;
+              .field{
+                display:flex;
+                flex-direction:row;
+                margin: 10px 0px;
+                label{
+                  margin-right:10px;
+                }
+                select{
+                  height:40px;
+                  border: 1px solid #CCC;
+                  border-radius:3px;
+                  width:200px;
+                }
+                .field-detail{
+                  margin-left:10px;
+                }
+              }
+            }
+          }
+        }
+        .vitrina_create_actions{
+          width: calc(20% - 20px);
+          margin-left: 20px;
+          .body{
+            padding: 20px;
+            button{
+              width:80%;
+              margin-bottom:10px;
+              color: #FFF;
+            }
+          }
+        } 
+      }
+      
+    }
 }

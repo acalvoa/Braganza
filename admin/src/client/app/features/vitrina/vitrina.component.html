@@ -1,0 +1,96 @@
+<div class="content">
+	<div class="card vitrina" *ngIf="view=='showcase'">
+		<div class="card-header text-white bg-primary header">
+			<div class="title">Vitrina</div>
+			<div class="search">
+				<div class="add"><button class="btn btn-success" (click)="createShowcase()">Agregar</button></div>
+				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
+			</div>
+		</div>
+		<div class="card-block body">
+		    <table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th>#</th>
+			      <th>Nombre Producto</th>
+			      <th>Precio</th>
+			      <th>Stock</th>
+			      <th>Descuento</th>
+			      <th>Fecha de publicación</th>
+			      <th>Estado</th>
+			      <th>Acciones</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr *ngFor="let vitrina of vitrina_showcase; let i = index">
+			      <td>{{ (i+1) }}</td>
+			      <td>{{ template.NAME }}</td>
+			      <td>{{ template.FIELDS.length }}</td>
+			      <td></td>
+			      <th>
+			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editTemplate(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(template)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			      </th>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+	<div class="create" *ngIf="view=='create' || view=='edit'">
+		<form (submit)="addShowcase($event,product.value, price.value, stock.value, discount.value, publishdate.value)" ngNativeValidate>
+			<div class="card vitrina_create">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Agregar producto a vitrina</div>
+				</div>
+				<div class="card-block body">
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Producto</label>
+					    <select class="form-control" [value]="(showcase.PRODUCT)?showcase.PRODUCT.ID_PRODUCT:-1"  #product>
+					    	<option value="-1">Selecciona un producto</option>
+					    	<option *ngFor="let product of productos" [value]="product.ID_PRODUCT">{{ product.NAME }}</option>
+					    </select>
+					    <small id="name_help" class="form-text text-muted">Producto que se pondra en vitrina.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Precio</label>
+					    <input type="number" class="form-control" name="price" id="price_producto" [(ngModel)]="price" aria-describedby="price_help" placeholder="Precio del producto" required [value]="(showcase.PRICE)?showcase.PRICE:''" #price>
+					    <small id="price_help" class="form-text text-muted">Precio del producto en pesos Chilenos.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Stock</label>
+					    <div class="stock_box">
+					    	<input type="number" class="form-control" name="stock" id="stock_producto" aria-describedby="stock_help" placeholder="Stock del producto" required [value]="(showcase.STOCK)?showcase.STOCK:''" #stock>
+					    	<div class="clone_stock"><button type="button" (click)="cloneStock(product.value, stock)">Clonar stock del producto</button></div>
+					    </div>
+					    <small id="stock_help" class="form-text text-muted">Stock efectivo de la vitrina (Se descuenta del stock efectivo del producto por cada compra, hasta el limite establecido para la vitrina o hasta que el producto se quede sin stock).</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Descuento</label>
+					    <input type="number" class="form-control" name="discount" id="discount_producto"  aria-describedby="discount_help" placeholder="Fecha en que se publicara el producto" required [value]="(showcase.DISCOUNT)?showcase.DISCOUNT:''" #discount>
+					    <small id="discount_help" class="form-text text-muted">Descuento que se aplica sobre el precio.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Fecha de publicacion</label>
+					    <input type="date" class="form-control" name="publishdate" id="publishdate_producto" aria-describedby="publishdate_help" placeholder="Descuento" required [value]="(showcase.PUBLISH_DATE)?showcase.PUBLISH_DATE:''" #publishdate>
+					    <small id="publishdate_help" class="form-text text-muted">Descuento que se aplica sobre el precio.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Precio Final</label>
+					    <div class="final_price"></div>
+					    <small id="publishdate_help" class="form-text text-muted">Descuento que se aplica sobre el precio.</small>
+				  	</div>
+				</div>
+			</div>
+			<div class="card vitrina_create_actions">
+				<div class="card-header text-white bg-success header">
+					<div class="title">Acciones</div>
+				</div>
+				<div class="card-block body">
+					<button type="submit" class="btn btn-success" *ngIf="view=='create'">Agregar</button>
+					<button type="submit" class="btn btn-success" *ngIf="view=='edit'">Editar</button>
+					<button type="button" (click)="backtoshowcase()" class="btn btn-warning">Volver</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

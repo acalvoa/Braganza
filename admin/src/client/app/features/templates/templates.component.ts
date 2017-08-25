@@ -93,6 +93,9 @@ export class TemplatesComponent {
 	private search_hide(element:any){
 	    element.value = '';
 	}
+	private backtoshowcase(){
+		this.view = 'showcase';
+	}
 	private searchby(value:string){
 	    this.templates_showcase = [];
 	    if(value==''){
@@ -106,5 +109,9 @@ export class TemplatesComponent {
 	        }
 	      }
 	    }
+	}
+	private deleteField(fi:Field){
+		console.log(this.template.FIELDS.indexOf(fi));
+		this.template.FIELDS.splice(this.template.FIELDS.indexOf(fi),1);
 	}
 }

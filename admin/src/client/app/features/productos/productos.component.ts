@@ -36,7 +36,6 @@ export class ProductosComponent {
 	private fetch(){
 		this.products_service.getProductos().subscribe(
 			data => {
-				console.log(this.productos);
 				this.productos = data;
 	      		this.productos_showcase = data;
 			},

@@ -19,9 +19,19 @@ module.exports = {
   		PRICE:{
   			type: 'integer'
   		},
+      STOCK:{
+        type:'integer'
+      },
   		DISCOUNT:{
   			type: 'integer'
-  		}
+  		},
+      PUBLISH_DATE:{
+        type: 'datetime'
+      },
+      STATUS:{
+        type: 'integer',
+        defaultsTo: 1
+      }
   	},
   	autoPK: false,
     tableName: 'SHOWCASE'

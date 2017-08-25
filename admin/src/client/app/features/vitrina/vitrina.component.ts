@@ -139,7 +139,7 @@ export class VitrinaComponent {
       return true;
     }
   }
-  private searchby(value:string){
+  private searchby(value:any){
       this.product_showcase = [];
       if(value==''){
         this.product_showcase = this.showcases;

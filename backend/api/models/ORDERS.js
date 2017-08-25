@@ -22,9 +22,9 @@ module.exports = {
   		TBK_TRANSACTION:{
   			model: 'TBK_TRANSACTIONS'
   		},
-  		DISCOUNT:{
-  			type: 'integer'
-  		}
+      USER:{
+        model: 'USERS'
+      }
   	},
   	autoPK: false,
     tableName: 'ORDERS'

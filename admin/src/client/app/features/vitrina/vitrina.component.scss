@@ -52,6 +52,38 @@
         line-height:40px;
         vertical-align:middle;
       }
+      .status{
+        color:#FFF;
+        font-weight:bold;
+        .active{
+          width:150px;
+          height:35px;
+          text-align:center;
+          border-radius:10px;
+          background:#00A439;
+        }
+        .inactive{
+          width:150px;
+          height:35px;
+          text-align:center;
+          border-radius:10px;
+          background:#0060BF;
+        }
+        .no_stock{
+          width:150px;
+          height:35px;
+          text-align:center;
+          border-radius:10px;
+          background:#DA0909;
+        }
+        .no_publish{
+          width:150px;
+          height:35px;
+          text-align:center;
+          border-radius:10px;
+          background:#FA8903;
+        }
+      }
     }
   }
   .create{

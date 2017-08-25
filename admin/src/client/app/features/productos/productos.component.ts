@@ -141,7 +141,6 @@ export class ProductosComponent {
   		}
   	}
   	private deleteCategory(category:Category){
-  		console.log(this.producto.CATEGORIES.indexOf(category));
   		this.producto.CATEGORIES.splice(this.producto.CATEGORIES.indexOf(category),1);
   	}
   	private search_hide(element:any){

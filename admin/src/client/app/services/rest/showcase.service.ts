@@ -37,6 +37,7 @@ export class ShowcaseService {
 	        	publish_date: showcase.PUBLISH_DATE
 	        },'/showcase').subscribe(
 	          	data => {
+	          		data.ORDERS = [];
 	          		this.showcase.push(data);
 	          		observer.next(data);
 	          		observer.complete();

@@ -21,8 +21,7 @@ export class VitrinaComponent {
   private productos:Product[];
   private product_showcase:Showcase[];
   private showcase:Showcase;
-  private price:number = 0;
-  private discount:number = 0;
+  private price_final:number = 0;
   constructor(private user:UserService, private router: Router, private alert:AlertService, private vitrina_service:ShowcaseService,
     private product_service:ProductosService) {
     this.showcases = [];
@@ -47,9 +46,14 @@ export class VitrinaComponent {
       }
     );
   }
-  private addShowcase(event:any, name:string){
+  private addShowcase(event:any, product:number, price:number, stock:number, discount: number, publishdate:string){
     event.preventDefault();
-    this.showcase.NAME = name;
+    if(stock <= this.productos[product].STOCK && stock != 0){
+      this.showcase.PRODUCT = this.productos[product];
+      this.showcase.PRICE = price;
+      this.showcase.STOCK = stock;
+      this.showcase.DISCOUNT = discount;
+      this.showcase.PUBLISH_DATE = publishdate;
       if(this.view == 'create'){
         this.vitrina_service.addShowcase(this.showcase).subscribe(
           data => {
@@ -59,8 +63,8 @@ export class VitrinaComponent {
           error => {
             this.alert.error(error);
           }
-        );
-      }
+      );
+    }
     else if(this.view == 'edit'){
         this.vitrina_service.editShowcase(this.showcase).subscribe(
           data => {
@@ -77,17 +81,31 @@ export class VitrinaComponent {
           }
         );
       }
-  } 
-    private createShowcase(){
-        this.showcase = new Showcase();
-        this.view = 'create';
-        this.final_price = 0;
     }
-      private editShowcase(showcase:Showcase){
-        this.showcase = new Showcase();
-        this.showcase.parse(showcase);
-        this.view = 'edit';
-      }
+    else{
+      this.alert.warning("El producto no tiene suficiente stock.");
+    }
+    
+  }
+  private dateconvert(value:string){
+    let newValue = value.replace(/\..*Z/g, '');
+    let date = value.split('T');
+    let date_seg = date[0].split('-');
+    return date_seg[0]+"-"+date_seg[1]+"-"+date_seg[2];
+  }
+  private createShowcase(){
+      this.showcase = new Showcase();
+      this.view = 'create';
+  }
+  private editShowcase(showcase:Showcase){
+    this.showcase = new Showcase();
+    this.showcase.parse(showcase);
+    this.price_final = (this.showcase.PRICE)?((this.showcase.DISCOUNT)?this.showcase.PRICE*((100-this.showcase.DISCOUNT)/100):this.showcase.PRICE):0;
+    this.view = 'edit';
+  }
+  private backtoshowcase(){
+    this.view = 'showcase';
+  }
   private delete(showcase:Showcase){
     this.vitrina_service.deleteShowcase(showcase).subscribe(
         data => {        
@@ -99,18 +117,48 @@ export class VitrinaComponent {
         }
       );
   }
+  private setPrice(price:number,discount:number){
+    this.price_final = (price)?((discount)?price*((100-discount)/100):price):0;
+  }
   private cloneStock(product:number, stock:any){
-        if(product != "-1"){
-            for(let i=0;i<this.productos.length;i++){
-                if(this.productos[i].ID_PRODUCT == product){
-                    stock.value = this.productos[i].STOCK;
-                }
-            }  
-        }
-        else
-        {
-            this.alert.warning("Debe seleccionar un producto");
-        }
+    if(product != -1){
+      stock.value = this.productos[product].STOCK;
+    }
+    else
+    {
+      this.alert.warning("Debe seleccionar un producto");
+    }
       
+  }
+  private nopublish(showcase:Showcase){
+    let date = new Date(showcase.PUBLISH_DATE.replace("T", " "));
+    if(date < (new Date())){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  private searchby(value:string){
+      this.product_showcase = [];
+      if(value==''){
+        this.product_showcase = this.showcases;
+      }
+      else
+      {
+        for(let i=0;i<this.showcases.length;i++){
+          if(this.showcases[i].PRODUCT.NAME.toUpperCase().search(value.toUpperCase()) != -1 || this.showcases[i].ID_SHOWCASE == value){
+            this.product_showcase.push(this.showcases[i]);
+          }
+        }
+      }
+  }
+  private findProduct(product:Product){
+    for(let i=0; i<this.productos.length; i++){
+      if(product.ID_PRODUCT = this.productos[i].ID_PRODUCT){
+        return i;
+      }
+    }
+    return -1;
   }
 }

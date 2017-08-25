@@ -28,6 +28,10 @@ module.exports = {
       PUBLISH_DATE:{
         type: 'datetime'
       },
+      ORDERS:{
+        collection: 'ORDERS',
+        via: 'SHOWCASE'
+      },
       STATUS:{
         type: 'integer',
         defaultsTo: 1

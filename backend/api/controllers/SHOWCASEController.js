@@ -20,14 +20,15 @@ module.exports = {
 			PUBLISH_DATE: publish_date
 		}).exec(function(err,showcase){
 			if(err) return res.serverError(err);
-			PRODUCT.findOne({
+			PRODUCTS.findOne({
 				ID_PRODUCT: product
 			}).exec(function(err_prod, product){
 				if(err_prod) return res.serverError(err_prod);
 				product.STOCK = product.STOCK - showcase.STOCK;
 				product.save(function(err_save){
 					if(err_save) return res.serverError(err_save);
-					return res.json(product);
+					showcase.PRODUCT = product;
+					return res.json(showcase);
 				});
 			});
 		});
@@ -57,7 +58,7 @@ module.exports = {
 	destroy: function(req,res){
 		var id = req.param('id');
 		SHOWCASE.destroy({
-			ID_PRODUCT: id
+			ID_SHOWCASE: id
 		}).exec(function(err,showcase_obj){
 			if(err) return res.serverError(err);
 			res.json(showcase_obj);

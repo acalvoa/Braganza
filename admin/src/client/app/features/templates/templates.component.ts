@@ -4,6 +4,7 @@ import { AlertService } from '../../services/alert/alert.service';
 import { Router } from '@angular/router';
 import { Template } from '../../classes/template';
 import { TemplatesService } from '../../services/rest/templates.service';
+import { Field } from '../../classes/field';
 /**
  * This class represents the main application component.
  */

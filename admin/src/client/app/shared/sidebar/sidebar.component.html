@@ -10,6 +10,13 @@
 		</div>
 	</div>
 	<div class="item" [routerLink]="['/configuraciones']" [routerLinkActive]="['router-link-active']"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Configuraciones</div>
+	<div class="itemmenu" #users>
+		<div class="title" (click)="users.active = !users.active" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Usuarios</div>
+		<div class="items" *ngIf="users.active">
+			<div class="item" [routerLink]="['/users/clientes']" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Clientes</div>
+			<div class="item" [routerLink]="['/users/admins']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Admins</div>
+		</div>
+	</div>
 </div>
 <div class="sidebarmini" *ngIf="hidden">
 	<div class="item" [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']" placement="right" ngbTooltip="Dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i></div>

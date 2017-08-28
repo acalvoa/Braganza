@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IRegComponent } from '../../classes/iregcomponent';
 
 /**
  * This class represents the main application component.

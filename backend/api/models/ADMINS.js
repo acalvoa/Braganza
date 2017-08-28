@@ -24,7 +24,7 @@ module.exports = {
   		PASSWORD: {
   			type: 'string'
   		},
-  		NAME: {
+  		LASTNAME: {
   			type: 'string'
   		},
   		ROLE: {

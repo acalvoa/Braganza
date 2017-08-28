@@ -13,6 +13,7 @@ import { VitrinaComponent } from './vitrina/vitrina.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { ClientesComponent } from './clientes/clientes.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -20,7 +21,7 @@ import { TemplatesComponent } from './templates/templates.component';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, SharedModule, FormsModule],
   declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
-  VitrinaComponent, CategoriasComponent, TemplatesComponent],
+  VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,
   AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent, CategoriasComponent,
   TemplatesComponent]

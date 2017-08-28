@@ -11,11 +11,11 @@ import { IRegComponent } from '../../classes/iregcomponent';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-templates',
-  templateUrl: 'templates.component.html',
-  styleUrls: ['templates.component.css'],
+  selector: 'sd-clientes',
+  templateUrl: 'clientes.component.html',
+  styleUrls: ['clientes.component.css'],
 })
-export class TemplatesComponent {
+export class ClientesComponent {
 	private view:string = 'showcase';
 	private templates:Template[];
 	private templates_showcase:Template[];

@@ -3,7 +3,7 @@
 		<div class="card-header text-white bg-primary header">
 			<div class="title">Administradores</div>
 			<div class="search">
-				<div class="add"><button class="btn btn-success" (click)="createAdmin()">Agregar</button></div>
+				<div class="add"><button class="btn btn-success" (click)="createTemplate()">Agregar</button></div>
 				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
 			</div>
 		</div>
@@ -19,11 +19,11 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr *ngFor="let admin of admins_showcase; let i = index">
+			    <tr *ngFor="let template of templates_showcase; let i = index">
 			      <td>{{ (i+1) }}</td>
-			      <td>{{ admin.EMAIL }}</td>
-			      <td>{{ admin.NAME +' '+ admin.LASTNAME  }}</td>
-			      <td>{{ admin.ROLE.NAME  }}</td>
+			      <td>{{ template.NAME }}</td>
+			      <td>{{ template.FIELDS.length }}</td>
+			      <td></td>
 			      <th>
 			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editAdmin(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
 			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(template)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
@@ -34,10 +34,13 @@
 		</div>
 	</div>
 	<div class="create" *ngIf="view=='create' || view=='edit'">
-		<form (submit)="addAdmin($event,name.value)" ngNativeValidate>
+		<form (submit)="addTemplate($event,name.value)" ngNativeValidate>
 			<div class="card templates_create">
 				<div class="card-header text-white bg-success header">
-					<div class="title">Crear un nuevo administrador</div>
+					<div class="title">Crear un nuevo administrado</div>
+					<div class="addsection">
+						<div class="add"><button type="button" class="btn btn-primary" (click)="createField()">Agregar Campo</button></div>
+					</div>
 				</div>
 				<div class="card-block body">
 				  	<div class="form-group">

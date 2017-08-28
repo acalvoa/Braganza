@@ -6,7 +6,6 @@ import { Admin } from '../../classes/admin';
 import { AdminsService } from '../../services/rest/admins.service';
 import { Field } from '../../classes/field';
 import { IRegComponent } from '../../classes/iregcomponent';
-import { }
 /**
  * This class represents the main application component.
  */
@@ -16,13 +15,11 @@ import { }
   templateUrl: 'admins.component.html',
   styleUrls: ['admins.component.css'],
 })
-export class AdminsComponent implements IRegComponent{
+export class AdminsComponent {
 	private view:string = 'showcase';
 	private admins:Admin[];
 	private admins_showcase:Admin[];
 	private admin:Admin;
-	public NAME_COMP = 'sd-admins';
-	public ID_COMP = module.id;
   	constructor(private user:UserService, private router: Router, private alert:AlertService,private admins_service:AdminsService) {
     	this.admins = [];
      	this.fetch();

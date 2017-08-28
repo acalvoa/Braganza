@@ -6,6 +6,7 @@ import { Category } from '../../classes/category';
 import { Image } from '../../classes/image';
 import { ImagesService } from '../../shared/images/images.service';
 import { CategoriasService } from '../../services/rest/categorias.service';
+import { IRegComponent } from '../../classes/iregcomponent';
 /**
  * This class represents the main application component.
  */

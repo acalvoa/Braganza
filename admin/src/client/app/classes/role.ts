@@ -1,4 +1,11 @@
+import { ComponentDef } from './componentdef';
 export class Role{
+	ID_ROLE:number;
 	NAME:string;
-	PERMISION:number[];
+	PERMISIONS:ComponentDef[];
+	public parse(role:Role){
+		this.ID_ROLE = role.ID_ROLE;
+		this.NAME = role.NAME;
+		this.PERMISIONS = role.PERMISIONS;
+	}
 }

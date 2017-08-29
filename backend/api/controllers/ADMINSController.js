@@ -61,13 +61,13 @@ module.exports = {
 
 	},
 	create: function(req,res){
-
+		
 	},
 	edit: function(req,res){
 
 	},
 	destroy: function(req,res){
-		
+
 	}
 };
 

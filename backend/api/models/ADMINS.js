@@ -33,7 +33,6 @@ module.exports = {
       toJSON: function () {
         var user = this.toObject();
         delete user.PASSWORD;
-        delete user.NAME;
         return user;
       },
       auth: function(password, callback){

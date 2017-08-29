@@ -13,6 +13,7 @@ import { ProductosService } from './rest/productos.service';
 import { ShowcaseService } from './rest/showcase.service';
 import { AdminsService } from './rest/admins.service';
 import { UsersService } from './rest/users.service';
+import { RolesService } from './rest/roles.service';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -21,7 +22,7 @@ import { UsersService } from './rest/users.service';
   imports: [],
   declarations: [],
   providers: [RestService, UserService, GuardService, LoadingService, AlertService, CategoriasService, TemplatesService,
-  ProductosService, ShowcaseService, AdminsService, UsersService],
+  ProductosService, ShowcaseService, AdminsService, UsersService, RolesService],
   exports: []
 })
 export class ServicesModule {

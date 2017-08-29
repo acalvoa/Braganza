@@ -7,6 +7,7 @@ import { Image } from '../../classes/image';
 import { ImagesService } from '../../shared/images/images.service';
 import { CategoriasService } from '../../services/rest/categorias.service';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
 /**
  * This class represents the main application component.
  */
@@ -17,13 +18,18 @@ import { IRegComponent } from '../../classes/iregcomponent';
   styleUrls: ['categorias.component.css'],
 })
 export class CategoriasComponent {
+  /* COMPONENT */
+  public static NAME:string = 'sd-categorias';
+  public static ID:string = module.id;
+  public static PUBLIC_NAME:string = 'Modulo de Categorias';
+  /*           */
 	private view:string = 'showcase';
 	private categorias:Category[];
   private categorias_showcase:Category[];
 	private categoria:Category;
   private selected_category:Category;
 	constructor(private user:UserService, private router: Router, private alert:AlertService, 
-		private image_service:ImagesService, private category_service:CategoriasService) {
+		private image_service:ImagesService, private category_service:CategoriasService, private role:RolesService) {
   	this.categorias = [];
   	this.fetch();
 	}

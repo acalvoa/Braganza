@@ -16,7 +16,7 @@ export class AdminsService {
 	}
 	public getAdmins(){
 		if(this.admins == null){
-			return this.rest.getMapSilent('/product_admin').map((res:Response) => {
+			return this.rest.getMapSilent('/admins').map((res:Response) => {
 				let response = res.json();
 				this.admins = response;
 				return response;
@@ -33,7 +33,7 @@ export class AdminsService {
 	        	name: admin.NAME,
 	        	lastname: admin.LASTNAME,
 	        	password: admin.PASSWORD
-	        },'/product_admin').subscribe(
+	        },'/admins').subscribe(
 	          	data => {
 	          		this.admins.push(data);
 	          		observer.next(data);
@@ -48,13 +48,12 @@ export class AdminsService {
 	public editAdmin(admin:Admin){
 		return new Observable(observer => {
 	        this.rest.post({
-	        	id: admin.ID_PRODUCT_TEMPLATE,
-	        	name: admin.NAME,
-	        	fields: JSON.stringify(admin.FIELDS)
-	        },'/product_admin/edit').subscribe(
+	        	id: admin.ID_ADMIN,
+	        	name: admin.NAME
+	        },'/admins/edit').subscribe(
 	          	data => {
 	          		for(let i=0; i<this.admins.length;i++){
-			            if(this.admins[i].ID_PRODUCT_TEMPLATE == data.ID_PRODUCT_TEMPLATE){
+			            if(this.admins[i].ID_ADMIN == data.ID_ADMIN){
 			              this.admins[i] = data;
 			            }
 			        }
@@ -69,7 +68,7 @@ export class AdminsService {
 	}
 	public deleteAdmin(admin:Admin){
 		return new Observable(observer => {
-	        this.rest.delete(admin.ID_PRODUCT_TEMPLATE, '/product_admin').subscribe(
+	        this.rest.delete(admin.ID_ADMIN, '/admins').subscribe(
 	          	data => {
 	          		this.admins.splice(this.admins.indexOf(admin),1);
 	          		observer.next(data);

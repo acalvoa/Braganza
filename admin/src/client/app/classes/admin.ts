@@ -5,12 +5,14 @@ export class Admin{
 	public NAME:string;
 	public PASSWORD:string;
 	public LASTNAME:string;
-	public ROLES:Role;
+	public ROLE:Role;
+
 	public parse(admin:Admin){
+		console.log(admin);
 		this.ID_ADMIN = admin.ID_ADMIN;
 		this.EMAIL = admin.EMAIL;
 		this.NAME = admin.NAME;
 		this.LASTNAME = admin.LASTNAME;
-		this.ROLES = admin.ROLES;
+		this.ROLE = admin.ROLE;
 	}
 }

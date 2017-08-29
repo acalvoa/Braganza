@@ -6,6 +6,7 @@ import { Template } from '../../classes/template';
 import { TemplatesService } from '../../services/rest/templates.service';
 import { Field } from '../../classes/field';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
 /**
  * This class represents the main application component.
  */
@@ -16,11 +17,17 @@ import { IRegComponent } from '../../classes/iregcomponent';
   styleUrls: ['clientes.component.css'],
 })
 export class ClientesComponent {
+	/* COMPONENT */
+	public static NAME:string = 'sd-clientes';
+	public static ID:string = module.id;
+	public static PUBLIC_NAME:string = 'Modulo de Clientes';
+	/*           */
 	private view:string = 'showcase';
 	private templates:Template[];
 	private templates_showcase:Template[];
 	private template:Template;
-  	constructor(private user:UserService, private router: Router, private alert:AlertService,private templates_service:TemplatesService) {
+  	constructor(private user:UserService, private router: Router, private alert:AlertService,private templates_service:TemplatesService,
+  		private role:RolesService) {
     	this.templates = [];
      	this.fetch();
   	}

@@ -8,7 +8,7 @@
 module.exports = {
 
   	attributes: {
-  		ID_ROL: {
+  		ID_ROLE: {
   			type: 'integer',
 	  		primaryKey: true,
 	  		autoIncrement: true

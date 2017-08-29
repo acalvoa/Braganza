@@ -104,7 +104,11 @@
                   width:200px;
                 }
                 .field-detail{
+                  height:30px;
                   margin-left:10px;
+                  input[type='checkbox']{
+                    margin-right:10px;
+                  }
                 }
               }
             }

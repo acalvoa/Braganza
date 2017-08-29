@@ -1,9 +1,9 @@
 <div class="content">
 	<div class="card templates" *ngIf="view=='showcase'">
 		<div class="card-header text-white bg-primary header">
-			<div class="title">Administradores</div>
+			<div class="title">Roles de Administrador</div>
 			<div class="search">
-				<div class="add"><button class="btn btn-success" (click)="createTemplate()">Agregar</button></div>
+				<div class="add"><button class="btn btn-success" (click)="createRole()">Agregar</button></div>
 				<div class="search_btn"><i class="fa fa-search" aria-hidden="true"></i><input type="text" placeholder="Buscador" (keyup)="searchby(searchtxt.value)" (blur)="search_hide(searchtxt)" #searchtxt/></div>
 			</div>
 		</div>
@@ -12,21 +12,20 @@
 			  <thead>
 			    <tr>
 			      <th>#</th>
-			      <th>Email</th>
 			      <th>Nombre</th>
-			      <th>Rol</th>
+			      <th>Numero de Permisos</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr *ngFor="let template of templates_showcase; let i = index">
+			    <tr *ngFor="let rol of roles_showcase; let i = index">
 			      <td>{{ (i+1) }}</td>
-			      <td>{{ template.NAME }}</td>
-			      <td>{{ template.FIELDS.length }}</td>
+			      <td>{{ rol.NAME }}</td>
+			      <td>{{ rol.PERMISIONS.length }}</td>
 			      <td></td>
 			      <th>
-			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editAdmin(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
-			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(template)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editRole(rol)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
+			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(rol)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
 			      </th>
 			    </tr>
 			  </tbody>
@@ -34,30 +33,27 @@
 		</div>
 	</div>
 	<div class="create" *ngIf="view=='create' || view=='edit'">
-		<form (submit)="addTemplate($event,name.value)" ngNativeValidate>
+		<form (submit)="addRole($event,name.value)" ngNativeValidate>
 			<div class="card templates_create">
 				<div class="card-header text-white bg-success header">
-					<div class="title">Crear un nuevo administrado</div>
-					<div class="addsection">
-						<div class="add"><button type="button" class="btn btn-primary" (click)="createField()">Agregar Campo</button></div>
-					</div>
+					<div class="title">Crear un rol de administrador</div>
 				</div>
 				<div class="card-block body">
 				  	<div class="form-group">
 					    <label for="exampleInputEmail1">Nombre</label>
-					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre del template" value="" required [value]="(template.NAME)?template.NAME:''" #name>
+					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre del template" value="" required [value]="(rol.NAME)?rol.NAME:''" #name>
 					    <small id="name_help" class="form-text text-muted">Nombre descriptivo del template.</small>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="category_description">Campos del template</label>
-				    	<small id="description_help" class="form-text text-muted">Campos adicionales que tendra este tipo de producto, puede ser texto, numero o fecha.</small>
+					    <label for="category_description">Permisos en Modulos</label>
+				    	<small id="description_help" class="form-text text-muted">Campos permitidos para ser utilizados por este rol.</small>
 				    	<div class="fields">
-					    	<div class="field form-inline" *ngFor="let fi of template.FIELDS; let i = index">
+					    	<div class="field form-inline" *ngFor="let component of rol.PERMISIONS; let i = index">
 					    		<div class="form-group field-detail">
-								    <label for="exampleInputEmail1"><b>Nombre: </b></label>
-								    <input type="text" class="form-control" [name]="'name_field_'+i" [id]="'name_field_'+i"  [(ngModel)]="template.FIELDS[i].NAME" placeholder="Nombre del campo" value="" required [value]="(fi.NAME)?fi.NAME:''" #field>
+					    			<input type="checkbox" class="form-control" [name]="'name_field_'+i" [id]="'name_field_'+i"  [(ngModel)]="rol.PERMISIONS[i].AUTH" placeholder="Nombre del campo" value="" [value]="(rol.PERMISIONS[i].AUTH)?rol.PERMISIONS[i].AUTH:false" #field>
+								    <label for="exampleInputEmail1"><b>{{ component.PUBLIC_NAME }}</b></label>
 							  	</div>
-							  	<div class="form-group field-detail">
+							  	<!-- <div class="form-group field-detail">
 								    <label for="exampleInputEmail1"><b>Tipo: </b></label>
 								    <select [value]="fi.TYPE" (change)="changeType(type.value, i)" #type>
 								    	<option value="string">Texto</option>
@@ -65,7 +61,7 @@
 								    	<option value="date">Fecha</option>
 								    </select>
 								    <div class="deletebtn"><button class="btn btn-danger" type="button" (click)="deleteField(fi)">Eliminar</button></div>
-							  	</div>
+							  	</div> -->
 					    	</div>
 					    </div>
 				  	</div>	

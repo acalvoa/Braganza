@@ -14,6 +14,9 @@ import { PipesModule } from '../pipes/pipes.module';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { RolesComponent } from './roles/roles.component';
+import { RolesService } from '../services/rest/roles.service';
+import { IRegComponent } from '../classes/iregcomponent';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -21,10 +24,17 @@ import { ClientesComponent } from './clientes/clientes.component';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, SharedModule, FormsModule],
   declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
-  VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent],
+  VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,
   AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent, CategoriasComponent,
-  TemplatesComponent]
+  TemplatesComponent, RolesComponent]
 })
 export class FeaturesModule {
+	private comp:any[] = [HomeComponent, AdminsComponent, ProductosComponent, DashboardComponent,
+  	VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent];
+	constructor(private roles:RolesService){
+		for(let i=0;i<this.comp.length;i++){
+			this.roles.registerComponent(this.comp[i].NAME, this.comp[i].ID, this.comp[i].PUBLIC_NAME);
+		}
+	}
 }

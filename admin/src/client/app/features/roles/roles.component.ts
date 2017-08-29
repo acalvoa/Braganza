@@ -6,42 +6,53 @@ import { Admin } from '../../classes/admin';
 import { AdminsService } from '../../services/rest/admins.service';
 import { Field } from '../../classes/field';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
+import { Role } from '../../classes/role';
+import { ComponentDef } from '../../classes/componentdef';
 /**
  * This class represents the main application component.
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-admins',
-  templateUrl: 'admins.component.html',
-  styleUrls: ['admins.component.css'],
+  selector: 'sd-roles',
+  templateUrl: 'roles.component.html',
+  styleUrls: ['roles.component.css'],
 })
-export class AdminsComponent {
+export class RolesComponent {
+	/* COMPONENT */
+    public static NAME:string = 'sd-roles';
+    public static ID:string = module.id;
+    public static PUBLIC_NAME:string = 'Modulo de Roles';
+    /*           */
 	private view:string = 'showcase';
-	private admins:Admin[];
-	private admins_showcase:Admin[];
-	private admin:Admin;
-  	constructor(private user:UserService, private router: Router, private alert:AlertService,private admins_service:AdminsService) {
-    	this.admins = [];
+	private roles:Role[];
+	private roles_showcase:Role[];
+	private components:ComponentDef[];
+	private rol:Role;
+  	constructor(private user:UserService, private router: Router, private alert:AlertService,private roles_service:RolesService,
+  		private role:RolesService) {
+  		this.roles = [];
+    	this.components = this.roles_service.getComponents();
      	this.fetch();
   	}
   	private fetch(){
-		this.admins_service.getAdmins().subscribe(
+		this.roles_service.getRoles().subscribe(
 	  		data => {
-	  			this.admins = data;
-	        	this.admins_showcase = data;
+	  			this.roles = data;
+	        	this.roles_showcase = data;
 	  		},
 	  		error => {
 	  			this.alert.error(error);
 	  		}
 	  	);
 	}
-	private addAdmin(event:any, name:string){
+	private addRole(event:any, name:string){
 		event.preventDefault();
-		this.admin.NAME = name;
+		this.rol.NAME = name;
 	    if(this.view == 'create'){
-	      this.admins_service.addAdmin(this.admin).subscribe(
+	      this.roles_service.addRole(this.rol).subscribe(
 	        data => {
-	            this.admin = null;
+	            this.rol = null;
 	            this.view = 'showcase';
 	        },
 	        error => {
@@ -50,14 +61,14 @@ export class AdminsComponent {
 	      );
 	    }
 		else if(this.view == 'edit'){
-	      this.admins_service.editAdmin(this.admin).subscribe(
+	      this.roles_service.editRole(this.rol).subscribe(
 	        data => {
-	          for(let i=0; i<this.admins.length;i++){
-	            if(this.admins[i].ID_ADMIN == this.admin.ID_ADMIN){
-	              this.admins[i] = this.admin;
+	          for(let i=0; i<this.roles.length;i++){
+	            if(this.roles[i].ID_ROLE == this.rol.ID_ROLE){
+	              this.roles[i] = this.rol;
 	            }
 	          }
-	          this.admin = null;
+	          this.rol = null;
 	          this.view = 'showcase';
 	        },
 	        error => {
@@ -66,15 +77,15 @@ export class AdminsComponent {
 	      );
 	    }
 	} 
-	private editAdmin(admin:Admin){
-		this.admin = new Admin();
-		this.admin.parse(admin);
+	private editRole(role:Role){
+		this.rol = new Role();
+		this.rol.parse(role);
     	this.view = 'edit';
 	}
-	private delete(admin:Admin){
-		this.admins_service.deleteAdmin(admin).subscribe(
+	private delete(role:Role){
+		this.roles_service.deleteRole(role).subscribe(
 	      data => {        
-	        this.admin = null;
+	        this.rol = null;
 	        this.view = 'showcase';
 	      },
 	      error => {
@@ -83,8 +94,9 @@ export class AdminsComponent {
 	    );
 	}
 	
-	private createAdmin(){
-		this.admin = new Admin();
+	private createRole(){
+		this.rol = new Role();
+		this.rol.PERMISIONS = this.components;
 		this.view = 'create';
 	}
 	private search_hide(element:any){
@@ -94,15 +106,15 @@ export class AdminsComponent {
 		this.view = 'showcase';
 	}
 	private searchby(value:string){
-	    this.admins_showcase = [];
+	    this.roles_showcase = [];
 	    if(value==''){
-	      this.admins_showcase = this.admins;
+	      this.roles_showcase = this.roles;
 	    }
 	    else
 	    {
-	      for(let i=0;i<this.admins.length;i++){
-	        if(this.admins[i].NAME.toUpperCase().search(value.toUpperCase()) != -1){
-	          this.admins_showcase.push(this.admins[i]);
+	      for(let i=0;i<this.roles.length;i++){
+	        if(this.roles[i].NAME.toUpperCase().search(value.toUpperCase()) != -1){
+	          this.roles_showcase.push(this.roles[i]);
 	        }
 	      }
 	    }

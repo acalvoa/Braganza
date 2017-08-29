@@ -7,6 +7,7 @@ import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert/alert.service';
 import { Router } from '@angular/router';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
 /**
  * This class represents the main application component.
  */
@@ -17,6 +18,11 @@ import { IRegComponent } from '../../classes/iregcomponent';
   styleUrls: ['vitrina.component.css'],
 })
 export class VitrinaComponent {
+  /* COMPONENT */
+  public static NAME:string = 'sd-vitrina';
+  public static ID:string = module.id;
+  public static PUBLIC_NAME:string = 'Modulo de Vitrina';
+  /*           */
   private view:string = 'showcase';
   private showcases:Showcase[];
   private productos:Product[];
@@ -24,7 +30,7 @@ export class VitrinaComponent {
   private showcase:Showcase;
   private price_final:number = 0;
   constructor(private user:UserService, private router: Router, private alert:AlertService, private vitrina_service:ShowcaseService,
-    private product_service:ProductosService) {
+    private product_service:ProductosService, private role:RolesService) {
     this.showcases = [];
     this.fetch();
   }

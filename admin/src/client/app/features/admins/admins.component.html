@@ -42,30 +42,34 @@
 				<div class="card-block body">
 				  	<div class="form-group">
 					    <label for="exampleInputEmail1">Nombre</label>
-					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre del template" value="" required [value]="(template.NAME)?template.NAME:''" #name>
-					    <small id="name_help" class="form-text text-muted">Nombre descriptivo del template.</small>
+					    <input type="text" class="form-control" name="name" id="name_admin" aria-describedby="name_help" placeholder="Nombre del usuario" value="" required [value]="(admin.NAME)?template.NAME:''" #name>
+					    <small id="name_help" class="form-text text-muted">Nombre del usuario.</small>
 				  	</div>
 				  	<div class="form-group">
-					    <label for="category_description">Campos del template</label>
-				    	<small id="description_help" class="form-text text-muted">Campos adicionales que tendra este tipo de producto, puede ser texto, numero o fecha.</small>
-				    	<div class="fields">
-					    	<div class="field form-inline" *ngFor="let fi of template.FIELDS; let i = index">
-					    		<div class="form-group field-detail">
-								    <label for="exampleInputEmail1"><b>Nombre: </b></label>
-								    <input type="text" class="form-control" [name]="'name_field_'+i" [id]="'name_field_'+i"  [(ngModel)]="template.FIELDS[i].NAME" placeholder="Nombre del campo" value="" required [value]="(fi.NAME)?fi.NAME:''" #field>
-							  	</div>
-							  	<div class="form-group field-detail">
-								    <label for="exampleInputEmail1"><b>Tipo: </b></label>
-								    <select [value]="fi.TYPE" (change)="changeType(type.value, i)" #type>
-								    	<option value="string">Texto</option>
-								    	<option value="number">Numero</option>
-								    	<option value="date">Fecha</option>
-								    </select>
-								    <div class="deletebtn"><button class="btn btn-danger" type="button" (click)="deleteField(fi)">Eliminar</button></div>
-							  	</div>
-					    	</div>
+					    <label for="exampleInputEmail1">Apellido</label>
+					    <input type="text" class="form-control" name="lastname" id="lastname_admin" aria-describedby="lastname_help" placeholder="Apellido del usuario" value="" required [value]="(admin.LASTNAME)?admin.LASTNAME:''" #name>
+					    <small id="lastname_help" class="form-text text-muted">Apellido del usuario.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Email</label>
+					    <input type="text" class="form-control" name="email" id="email_admin" aria-describedby="email_help" placeholder="Email del usuario" value="" required [value]="(admin.EMAIL)?admin.EMAIL:''" #name>
+					    <small id="lastname_help" class="form-text text-muted">Email del usuario.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="exampleInputEmail1">Password</label>
+					    <input type="password" class="form-control" name="password" id="password_admin" aria-describedby="password_help" placeholder="Contraseña" value="" required [value]="(admin.PASSWORD)?admin.PASSWORD:''" #name>
+					    <small id="lastname_help" class="form-text text-muted">Contraseña del usuario.</small>
+				  	</div>
+				  	<div class="form-group">
+					    <label for="producto_description">Rol</label>
+					    <div class="category_selector">
+					    	 <select class="form-control" #categoria>
+						    	<option value="-1">Seleccione una categoria</option>
+						    	<option *ngFor="let role of roles; let i = index" [value]="role.ID_ROLE">{{ role.NAME }}</option>
+						    </select>
 					    </div>
-				  	</div>	
+					    <small id="description_help" class="form-text text-muted">Rol del usuario.</small>
+					</div>
 				</div>
 			</div>
 			<div class="card templates_create_actions">

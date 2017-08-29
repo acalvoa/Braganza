@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert/alert.service';
 import { Router } from '@angular/router';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
 /**
  * This class represents the main application component.
  */
@@ -13,7 +14,8 @@ import { IRegComponent } from '../../classes/iregcomponent';
   styleUrls: ['login.component.css'],
 })
 export class LoginComponent {
-  	constructor(private user:UserService, private router: Router, private alert:AlertService) {
+
+  	constructor(private user:UserService, private router: Router, private alert:AlertService, private role:RolesService) {
     
   	}
   	private login(event:any, user:string, password:string){

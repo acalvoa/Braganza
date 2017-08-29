@@ -11,6 +11,7 @@ import { ProductosService } from '../../services/rest/productos.service';
 import { TemplatesService } from '../../services/rest/templates.service';
 import { CategoriasService } from '../../services/rest/categorias.service';
 import { IRegComponent } from '../../classes/iregcomponent';
+import { RolesService } from '../../services/rest/roles.service';
 /**
  * This class represents the main application component.
  */
@@ -21,6 +22,11 @@ import { IRegComponent } from '../../classes/iregcomponent';
   styleUrls: ['productos.component.css'],
 })
 export class ProductosComponent {
+	/* COMPONENT */
+    public static NAME:string = 'sd-productos';
+    public static ID:string = module.id;
+    public static PUBLIC_NAME:string = 'Modulo de Productos';
+    /*           */
 	private view:string = 'showcase';
 	private productos:Product[];
 	private categorias:Category[];
@@ -30,7 +36,7 @@ export class ProductosComponent {
   	private selected_producto:Product;
 	constructor(private user:UserService, private router: Router, private alert:AlertService, 
 		private image_service:ImagesService, private products_service:ProductosService,
-		private category_service:CategoriasService, private template_service:TemplatesService) {
+		private category_service:CategoriasService, private template_service:TemplatesService, private role:RolesService) {
 	  	this.productos = [];
 	  	this.fetch();
 	}

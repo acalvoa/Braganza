@@ -11,6 +11,7 @@ import { TemplatesComponent } from './templates/templates.component';
 
 import { ClientesComponent } from './clientes/clientes.component';
 import { AdminsComponent } from './admins/admins.component';
+import { RolesComponent } from './roles/roles.component';
 
 
 export const FeaturesRoutes: Route[] = [
@@ -50,6 +51,10 @@ export const FeaturesRoutes: Route[] = [
       {
         path: 'users/admins',
         component: AdminsComponent
+      },
+      {
+        path: 'users/roles',
+        component: RolesComponent
       }
     ],
     canActivate: [GuardService]

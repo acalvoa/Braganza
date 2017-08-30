@@ -12,6 +12,18 @@ module.exports = {
   			type: 'integer',
 	  		primaryKey: true,
 	  		autoIncrement: true
+  		},
+  		TYPE:{
+  			type: 'string'
+  		},
+  		TAG:{
+  			type: 'string'
+  		},
+  		SUBTAG:{
+  			type: 'string'
+  		},
+  		DATA:{
+  			type: 'json'
   		}
   	},
   	autoPK: false,

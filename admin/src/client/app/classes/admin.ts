@@ -8,7 +8,6 @@ export class Admin{
 	public ROLE:Role;
 
 	public parse(admin:Admin){
-		console.log(admin);
 		this.ID_ADMIN = admin.ID_ADMIN;
 		this.EMAIL = admin.EMAIL;
 		this.NAME = admin.NAME;

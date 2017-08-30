@@ -4,15 +4,26 @@ import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { RestService } from './rest.service';
+import { RolesService } from './roles.service';
 import { Admin } from '../../classes/admin'; 
+import { Role } from '../../classes/role'; 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AdminsService {
 	private admins:Admin[];
+	private roles:Role[];
 	//construimos los metodos
-	constructor(@Inject (RestService) private rest:RestService) {
+	constructor(@Inject (RestService) private rest:RestService, @Inject (RolesService) private roles_service:RolesService) {
 		this.admins = null;
+		this.roles_service.getRoles().subscribe(
+			data =>{
+				this.roles = data;
+			},
+			error => {
+
+			}
+		)
 	}
 	public getAdmins(){
 		if(this.admins == null){
@@ -32,9 +43,12 @@ export class AdminsService {
 	        this.rest.post({
 	        	name: admin.NAME,
 	        	lastname: admin.LASTNAME,
+	        	email: admin.EMAIL,
+	        	role: admin.ROLE.ID_ROLE,
 	        	password: admin.PASSWORD
 	        },'/admins').subscribe(
 	          	data => {
+	          		data.ROLE = this.searchRole(data.ROLE);
 	          		this.admins.push(data);
 	          		observer.next(data);
 	          		observer.complete();
@@ -45,16 +59,28 @@ export class AdminsService {
 	        );
 	    });
 	}
+	private searchRole(id:number){
+		for(let i=0; i<this.roles.length;i++){
+            if(this.roles[i].ID_ROLE == id){
+              	return this.roles[i];
+            }
+        }
+        return null;
+	}
 	public editAdmin(admin:Admin){
 		return new Observable(observer => {
 	        this.rest.post({
 	        	id: admin.ID_ADMIN,
-	        	name: admin.NAME
+	        	name: admin.NAME,
+	        	email: admin.EMAIL,
+	        	lastname: admin.LASTNAME,
+	        	role: admin.ROLE.ID_ROLE
 	        },'/admins/edit').subscribe(
 	          	data => {
 	          		for(let i=0; i<this.admins.length;i++){
 			            if(this.admins[i].ID_ADMIN == data.ID_ADMIN){
-			              this.admins[i] = data;
+			            	data.ROLE = this.searchRole(data.ROLE);
+			              	this.admins[i] = data;
 			            }
 			        }
 	          		observer.next(data);

@@ -18,7 +18,10 @@ module.exports = {
   		},
   		PERMISIONS: {
   			type: 'json'
-  		}
+  		},
+      SUPERUSER: {
+        type: 'boolean'
+      }
   	},
   	autoPK: false,
     tableName: 'ROLES'

@@ -1,21 +1,44 @@
 <div class="sidebar" *ngIf="!hidden">
 	<div class="item" [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']"><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Dashboard</div>
 	<div class="itemmenu" #menu>
-		<div class="title" (click)="menu.active = !menu.active" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Productos</div>
-		<div class="items" *ngIf="menu.active">
+		<div class="title" (click)="tab('productos')" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Productos</div>
+		<div class="items" *ngIf="active == 'productos'">
 			<div class="item" [routerLink]="['/productos/catalogo']" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Catalogo</div>
 			<div class="item" [routerLink]="['/productos/vitrina']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Vitrina</div>
 			<div class="item" [routerLink]="['/productos/categorias']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Categorias</div>
 			<div class="item" [routerLink]="['/productos/templates']" [routerLinkActive]="['router-link-active']"><i class="fa fa-file-archive-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Templates</div>
 		</div>
 	</div>
-	<div class="item" [routerLink]="['/configuraciones']" [routerLinkActive]="['router-link-active']"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Configuraciones</div>
+	<div class="itemmenu" #suscriptions>
+		<div class="title" (click)="tab('suscription')" [routerLinkActive]="['router-link-active']"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Suscripciones</div>
+		<div class="items" *ngIf="active == 'suscription'">
+			<div class="item" [routerLink]="['/suscription/planes']" [routerLinkActive]="['router-link-active']"><i class="fa fa-cubes" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Planes</div>
+			<div class="item" [routerLink]="['/suscription/suscritos']" [routerLinkActive]="['router-link-active']"><i class="fa fa-address-book-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Suscritos</div>
+			<div class="item" [routerLink]="['/suscription/odetrabajo']" [routerLinkActive]="['router-link-active']"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;O. de trabajo</div>
+			<div class="item" [routerLink]="['/suscription/cobros']" [routerLinkActive]="['router-link-active']"><i class="fa fa-money" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Cobros</div>
+		</div>
+	</div>
+	<div class="itemmenu" #pedidos>
+		<div class="title" (click)="tab('pedidos')" [routerLinkActive]="['router-link-active']"><i class="fa fa-shopping-bag" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Pedidos</div>
+		<div class="items" *ngIf="active == 'pedidos'">
+			<div class="item" [routerLink]="['/pedidos/compras']" [routerLinkActive]="['router-link-active']"><i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Compras</div>
+			<div class="item" [routerLink]="['/pedidos/transbank']" [routerLinkActive]="['router-link-active']"><i class="fa fa-address-book-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Transbank</div>
+			<div class="item" [routerLink]="['/pedidos/transbank']" [routerLinkActive]="['router-link-active']"><i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Roles</div>
+		</div>
+	</div>
 	<div class="itemmenu" #users>
-		<div class="title" (click)="users.active = !users.active" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Usuarios</div>
-		<div class="items" *ngIf="users.active">
-			<div class="item" [routerLink]="['/users/clientes']" [routerLinkActive]="['router-link-active']"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Clientes</div>
-			<div class="item" [routerLink]="['/users/admins']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Admins</div>
-			<div class="item" [routerLink]="['/users/roles']" [routerLinkActive]="['router-link-active']"><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Roles</div>
+		<div class="title" (click)="tab('users')" [routerLinkActive]="['router-link-active']"><i class="fa fa-user-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Usuarios</div>
+		<div class="items" *ngIf="active == 'users'">
+			<div class="item" [routerLink]="['/users/clientes']" [routerLinkActive]="['router-link-active']"><i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Clientes</div>
+			<div class="item" [routerLink]="['/users/admins']" [routerLinkActive]="['router-link-active']"><i class="fa fa-address-book-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Admins</div>
+			<div class="item" [routerLink]="['/users/roles']" [routerLinkActive]="['router-link-active']"><i class="fa fa-address-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Roles</div>
+		</div>
+	</div>
+	<div class="itemmenu" #config>
+		<div class="title" (click)="tab('config')" [routerLinkActive]="['router-link-active']"><i class="fa fa-cogs" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Configuraciones</div>
+		<div class="items" *ngIf="active == 'config'">
+			<div class="item" [routerLink]="['/config/mailing']" [routerLinkActive]="['router-link-active']"><i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Mailing</div>
+			<div class="item" [routerLink]="['/config/general']" [routerLinkActive]="['router-link-active']"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;General</div>
 		</div>
 	</div>
 </div>

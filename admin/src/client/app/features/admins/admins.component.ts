@@ -51,19 +51,22 @@ export class AdminsComponent {
 	  		}
 	  	);
 	}
-	private addAdmin(event:any, name:string){
+	private addAdmin(event:any, name:string, lastname:string, email:string, password:string){
 		event.preventDefault();
 		this.admin.NAME = name;
+		this.admin.LASTNAME = lastname;
+		this.admin.EMAIL = email;
 	    if(this.view == 'create'){
-	      this.admins_service.addAdmin(this.admin).subscribe(
-	        data => {
-	            this.admin = null;
-	            this.view = 'showcase';
-	        },
-	        error => {
-	          this.alert.error(error);
-	        }
-	      );
+			this.admin.PASSWORD = password;	
+	      	this.admins_service.addAdmin(this.admin).subscribe(
+		        data => {
+		            this.admin = null;
+		            this.view = 'showcase';
+		        },
+		        error => {
+		          this.alert.error(error);
+		        }
+	      	);
 	    }
 		else if(this.view == 'edit'){
 	      this.admins_service.editAdmin(this.admin).subscribe(
@@ -98,7 +101,13 @@ export class AdminsComponent {
 	      }
 	    );
 	}
-	
+	private changeRole(temp:number){
+  		for(let i=0; i<this.roles.length; i++){
+  			if(this.roles[i].ID_ROLE == temp){
+  				this.admin.ROLE = this.roles[i];
+  			}
+  		}
+  	}
 	private createAdmin(){
 		this.admin = new Admin();
 		this.view = 'create';

@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class AdminsService {
 	private admins:Admin[];
 	private roles:Role[];
+	private admin_me:Admin;
 	//construimos los metodos
 	constructor(@Inject (RestService) private rest:RestService, @Inject (RolesService) private roles_service:RolesService) {
 		this.admins = null;
@@ -33,6 +34,7 @@ export class AdminsService {
 				return response;
 			});
 		}
+		
 		return new Observable(observer => {
 	          observer.next(this.admins);
 	          observer.complete();
@@ -104,6 +106,19 @@ export class AdminsService {
 	          		console.log(error);
 	          	}
 	        );
+	    });
+	}
+	public getAdmin(){
+		if(this.admin_me == null){
+			return this.rest.getMapSilent('/admins/me').map((res:Response) => {
+				let response = res.json();
+				this.admin_me = response.USER;
+				return response.USER;
+			});
+		}
+		return new Observable(observer => {
+	          observer.next(this.admin_me);
+	          observer.complete();
 	    });
 	}
 }

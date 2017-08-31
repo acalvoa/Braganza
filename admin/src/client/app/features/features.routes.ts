@@ -13,6 +13,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { AdminsComponent } from './admins/admins.component';
 import { RolesComponent } from './roles/roles.component';
 
+import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
+import { MailingComponent } from './mailing/mailing.component';
 
 export const FeaturesRoutes: Route[] = [
   {
@@ -55,6 +57,14 @@ export const FeaturesRoutes: Route[] = [
       {
         path: 'users/roles',
         component: RolesComponent
+      },
+      {
+        path: 'config/general',
+        component: ConfiguracionesComponent
+      },
+      {
+        path: 'config/mailing',
+        component: MailingComponent
       }
     ],
     canActivate: [GuardService]

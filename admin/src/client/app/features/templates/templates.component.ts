@@ -20,7 +20,7 @@ export class TemplatesComponent {
 	/* COMPONENT */
     public static NAME:string = 'sd-templates';
     public static ID:string = module.id;
-    public static PUBLIC_NAME:string = 'Modulo de emplates de Productos';
+    public static PUBLIC_NAME:string = 'Modulo de Templates de Productos';
     /*           */
 	private view:string = 'showcase';
 	private templates:Template[];

@@ -112,6 +112,19 @@
                 }
               }
             }
+            .superuser{
+              flex-direction:column;
+              display:flex;
+              .check{
+                flex-direction:row;
+                display:flex;
+                input{
+                  height:20px;
+                  width:20px;
+                  margin-right:5px;
+                }
+              }
+            }
           }
         }
         .templates_create_actions{

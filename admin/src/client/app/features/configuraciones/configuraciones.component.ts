@@ -7,13 +7,13 @@ import { RolesService } from '../../services/rest/roles.service';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-configuraciones',
+  selector: 'sd-general',
   templateUrl: 'configuraciones.component.html',
   styleUrls: ['configuraciones.component.css'],
 })
 export class ConfiguracionesComponent {
     /* COMPONENT */
-    public static NAME:string = 'sd-configuraciones';
+    public static NAME:string = 'sd-general';
     public static ID:string = module.id;
     public static PUBLIC_NAME:string = 'Modulo de Configuraciones';
     /*           */

@@ -4,37 +4,39 @@ import { Http, Response, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { RestService } from './rest.service';
-import { Template } from '../../classes/template'; 
+import { User } from '../../classes/user'; 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UsersService {
-	private templates:Template[];
+	private users:User[];
 	//construimos los metodos
 	constructor(@Inject (RestService) private rest:RestService) {
-		this.templates = null;
+		this.users = null;
 	}
 	public getUsers(){
-		if(this.templates == null){
-			return this.rest.getMapSilent('/product_template').map((res:Response) => {
+		if(this.users == null){
+			return this.rest.getMapSilent('/users').map((res:Response) => {
 				let response = res.json();
-				this.templates = response;
+				this.users = response;
 				return response;
 			});
 		}
 		return new Observable(observer => {
-	          observer.next(this.templates);
+	          observer.next(this.users);
 	          observer.complete();
 	    });
 	}
-	public addUser(template:Template){
+	public addUser(user:User){
 		return new Observable(observer => {
 	        this.rest.post({
-	        	name: template.NAME,
-	        	fields: JSON.stringify(template.FIELDS)
-	        },'/product_template').subscribe(
+	        	name: user.NAME,
+	        	lastname: user.LASTNAME,
+	        	password: user.PASSWORD,
+	        	email: user.EMAIL
+	        },'/users').subscribe(
 	          	data => {
-	          		this.templates.push(data);
+	          		this.users.push(data);
 	          		observer.next(data);
 	          		observer.complete();
 	          	},
@@ -44,17 +46,19 @@ export class UsersService {
 	        );
 	    });
 	}
-	public editUser(template:Template){
+	public editUser(user:User){
 		return new Observable(observer => {
 	        this.rest.post({
-	        	id: template.ID_PRODUCT_TEMPLATE,
-	        	name: template.NAME,
-	        	fields: JSON.stringify(template.FIELDS)
-	        },'/product_template/edit').subscribe(
+	        	id: user.ID_USER,
+	        	name: user.NAME,
+	        	lastname: user.LASTNAME,
+	        	password: user.PASSWORD,
+	        	email: user.EMAIL
+	        },'/users/edit').subscribe(
 	          	data => {
-	          		for(let i=0; i<this.templates.length;i++){
-			            if(this.templates[i].ID_PRODUCT_TEMPLATE == data.ID_PRODUCT_TEMPLATE){
-			              this.templates[i] = data;
+	          		for(let i=0; i<this.users.length;i++){
+			            if(this.users[i].ID_USER == data.ID_USER){
+			              this.users[i] = data;
 			            }
 			        }
 	          		observer.next(data);
@@ -66,11 +70,11 @@ export class UsersService {
 	        );
 	    });
 	}
-	public deleteUser(template:Template){
+	public deleteUser(user:User){
 		return new Observable(observer => {
-	        this.rest.delete(template.ID_PRODUCT_TEMPLATE, '/product_template').subscribe(
+	        this.rest.delete(user.ID_USER, '/users').subscribe(
 	          	data => {
-	          		this.templates.splice(this.templates.indexOf(template),1);
+	          		this.users.splice(this.users.indexOf(user),1);
 	          		observer.next(data);
 	          		observer.complete();
 	          	},

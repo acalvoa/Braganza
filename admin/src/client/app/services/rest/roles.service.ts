@@ -38,10 +38,10 @@ export class RolesService {
 	    });
 	}
 	public addRole(role:Role){
-		console.log(role);
 		return new Observable(observer => {
 	        this.rest.post({
 	        	name: role.NAME,
+	        	superuser: role.SUPERUSER,
 	        	permisions: JSON.stringify(role.PERMISIONS)
 	        },'/roles').subscribe(
 	          	data => {
@@ -61,6 +61,7 @@ export class RolesService {
 	        this.rest.post({
 	        	id: role.ID_ROLE,
 	        	name: role.NAME,
+	        	superuser: role.SUPERUSER,
 	        	permisions: JSON.stringify(role.PERMISIONS)
 	        },'/roles/edit').subscribe(
 	          	data => {

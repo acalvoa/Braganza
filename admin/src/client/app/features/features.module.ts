@@ -17,6 +17,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { RolesComponent } from './roles/roles.component';
 import { RolesService } from '../services/rest/roles.service';
 import { IRegComponent } from '../classes/iregcomponent';
+import { ConfiguracionesComponent } from './configuraciones/configuraciones.component';
+import { MailingComponent } from './mailing/mailing.component';
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -24,16 +26,19 @@ import { IRegComponent } from '../classes/iregcomponent';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule, SharedModule, FormsModule],
   declarations: [HomeComponent, AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,
-  VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent],
+  VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent,
+  MailingComponent, ConfiguracionesComponent],
   exports: [CommonModule, FormsModule, RouterModule, HomeComponent,
   AdminsComponent, LoginComponent, ProductosComponent, DashboardComponent,VitrinaComponent, CategoriasComponent,
-  TemplatesComponent, RolesComponent]
+  TemplatesComponent, RolesComponent, MailingComponent, ConfiguracionesComponent]
 })
 export class FeaturesModule {
 	private comp:any[] = [HomeComponent, AdminsComponent, ProductosComponent, DashboardComponent,
-  	VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent];
+  	VitrinaComponent, CategoriasComponent, TemplatesComponent, AdminsComponent, ClientesComponent, RolesComponent,
+    MailingComponent, ConfiguracionesComponent];
 	constructor(private roles:RolesService){
 		for(let i=0;i<this.comp.length;i++){
+      console.log(this.comp[i].NAME);
 			this.roles.registerComponent(this.comp[i].NAME, this.comp[i].ID, this.comp[i].PUBLIC_NAME);
 		}
 	}

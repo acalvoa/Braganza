@@ -25,7 +25,7 @@ module.exports = {
 		var password = req.param('password');
 		ADMINS.findOne({
 			EMAIL: user
-		}).exec(function(err,admin){
+		}).populateAll().exec(function(err,admin){
 			if(err) return res.serverError({
 				RESPONSE: 500,
 				ERROR: err

@@ -2,9 +2,8 @@ import { Component, Inject} from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert/alert.service';
 import { Router } from '@angular/router';
-import { Template } from '../../classes/template';
-import { TemplatesService } from '../../services/rest/templates.service';
-import { Field } from '../../classes/field';
+import { UsersService } from '../../services/rest/users.service';
+import { User } from '../../classes/user';
 import { IRegComponent } from '../../classes/iregcomponent';
 import { RolesService } from '../../services/rest/roles.service';
 /**
@@ -23,19 +22,19 @@ export class ClientesComponent {
 	public static PUBLIC_NAME:string = 'Modulo de Clientes';
 	/*           */
 	private view:string = 'showcase';
-	private templates:Template[];
-	private templates_showcase:Template[];
-	private template:Template;
-  	constructor(private user:UserService, private router: Router, private alert:AlertService,private templates_service:TemplatesService,
+	private clientes:User[];
+	private clientes_showcase:User[];
+	private cliente:User;
+  	constructor(private user:UserService, private router: Router, private alert:AlertService,private users_service:UsersService,
   		private role:RolesService) {
-    	this.templates = [];
+    	this.clientes = [];
      	this.fetch();
   	}
   	private fetch(){
-		this.templates_service.getTemplates().subscribe(
+		this.users_service.getUsers().subscribe(
 	  		data => {
-	  			this.templates = data;
-	        	this.templates_showcase = data;
+	  			this.clientes = data;
+	        	this.clientes_showcase = data;
 	  		},
 	  		error => {
 	  			this.alert.error(error);
@@ -44,11 +43,11 @@ export class ClientesComponent {
 	}
 	private addTemplate(event:any, name:string){
 		event.preventDefault();
-		this.template.NAME = name;
+		this.cliente.NAME = name;
 	    if(this.view == 'create'){
-	      this.templates_service.addTemplate(this.template).subscribe(
+	      this.users_service.addUser(this.cliente).subscribe(
 	        data => {
-	            this.template = null;
+	            this.cliente = null;
 	            this.view = 'showcase';
 	        },
 	        error => {
@@ -57,14 +56,14 @@ export class ClientesComponent {
 	      );
 	    }
 		else if(this.view == 'edit'){
-	      this.templates_service.editTemplate(this.template).subscribe(
+	      this.users_service.editUser(this.cliente).subscribe(
 	        data => {
-	          for(let i=0; i<this.templates.length;i++){
-	            if(this.templates[i].ID_PRODUCT_TEMPLATE == this.template.ID_PRODUCT_TEMPLATE){
-	              this.templates[i] = this.template;
+	          for(let i=0; i<this.clientes.length;i++){
+	            if(this.clientes[i].ID_USER == this.cliente.ID_USER){
+	              this.clientes[i] = this.cliente;
 	            }
 	          }
-	          this.template = null;
+	          this.cliente = null;
 	          this.view = 'showcase';
 	        },
 	        error => {
@@ -73,15 +72,15 @@ export class ClientesComponent {
 	      );
 	    }
 	} 
-	private editTemplate(template:Template){
-		this.template = new Template();
-		this.template.parse(template);
+	private editTemplate(user:User){
+		this.cliente = new User();
+		this.cliente.parse(user);
     	this.view = 'edit';
 	}
-	private delete(template:Template){
-		this.templates_service.deleteTemplate(template).subscribe(
+	private delete(user:User){
+		this.users_service.deleteUser(user).subscribe(
 	      data => {        
-	        this.template = null;
+	        this.cliente = null;
 	        this.view = 'showcase';
 	      },
 	      error => {
@@ -89,16 +88,9 @@ export class ClientesComponent {
 	      }
 	    );
 	}
-	private changeType(value:string, i:number){
-		this.template.FIELDS[i].TYPE = value;
-	}
-	private createTemplate(){
-		this.template = new Template();
-		this.view = 'create';
-	}
-	private createField(){
-		this.template.addField();
-	}
+	private changePassword(user:User){
+  		
+  	}
 	private search_hide(element:any){
 	    element.value = '';
 	}
@@ -106,21 +98,17 @@ export class ClientesComponent {
 		this.view = 'showcase';
 	}
 	private searchby(value:string){
-	    this.templates_showcase = [];
+	    this.clientes_showcase = [];
 	    if(value==''){
-	      this.templates_showcase = this.templates;
+	      this.clientes_showcase = this.clientes;
 	    }
 	    else
 	    {
-	      for(let i=0;i<this.templates.length;i++){
-	        if(this.templates[i].NAME.toUpperCase().search(value.toUpperCase()) != -1){
-	          this.templates_showcase.push(this.templates[i]);
+	      for(let i=0;i<this.clientes.length;i++){
+	        if(this.clientes[i].NAME.toUpperCase().search(value.toUpperCase()) != -1){
+	          this.clientes_showcase.push(this.clientes[i]);
 	        }
 	      }
 	    }
-	}
-	private deleteField(fi:Field){
-		console.log(this.template.FIELDS.indexOf(fi));
-		this.template.FIELDS.splice(this.template.FIELDS.indexOf(fi),1);
 	}
 }

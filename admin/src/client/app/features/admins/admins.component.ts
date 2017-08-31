@@ -108,6 +108,9 @@ export class AdminsComponent {
   			}
   		}
   	}
+  	private changePassword(admin:Admin){
+  		
+  	}
 	private createAdmin(){
 		this.admin = new Admin();
 		this.view = 'create';

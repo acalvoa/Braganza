@@ -44,6 +44,13 @@
 					    <input type="text" class="form-control" name="name" id="name_category" aria-describedby="name_help" placeholder="Nombre del template" value="" required [value]="(rol.NAME)?rol.NAME:''" #name>
 					    <small id="name_help" class="form-text text-muted">Nombre descriptivo del template.</small>
 				  	</div>
+				  	<div class="form-group superuser">
+					    <div class="check">
+						    <input type="checkbox" class="form-control" name="superuser" aria-describedby="superuser_help" [value]="(rol.SUPERUSER)?rol.SUPERUSER:false" [(ngModel)]="rol.SUPERUSER" #superuser>
+						    <label for="exampleInputEmail1">Superusuario</label>
+						</div>
+					    <small id="name_help" class="form-text text-muted">El superusuario es un tipo de administrador que tiene acceso total al sistema.</small>
+				  	</div>
 				  	<div class="form-group">
 					    <label for="category_description">Permisos en Modulos</label>
 				    	<small id="description_help" class="form-text text-muted">Campos permitidos para ser utilizados por este rol.</small>

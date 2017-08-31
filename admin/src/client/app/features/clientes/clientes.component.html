@@ -12,21 +12,23 @@
 			  <thead>
 			    <tr>
 			      <th>#</th>
-			      <th>Nombre Template</th>
-			      <th>Campos</th>
-			      <th>Productos</th>
+			      <th>Nombre del Cliente</th>
+			      <th>Email</th>
+			      <th>Numero de Suscripciones</th>
+			      <th>Numero de Compras</th>
 			      <th>Acciones</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr *ngFor="let template of templates_showcase; let i = index">
+			    <tr *ngFor="let cli of clientes_showcase; let i = index">
 			      <td>{{ (i+1) }}</td>
-			      <td>{{ template.NAME }}</td>
+			      <td>{{ cli.NAME +' '+  }}</td>
 			      <td>{{ template.FIELDS.length }}</td>
 			      <td></td>
 			      <th>
 			      	<button class="btn btn-warning" placement="top" ngbTooltip="Editar" (click)="editTemplate(template)"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i></button>
 			    	<button class="btn btn-danger" placement="top" ngbTooltip="Eliminar" (click)="delete(template)"><i class="fa fa-trash" aria-hidden="true" ></i></button>
+			      	<button class="btn btn-primary" placement="top" ngbTooltip="Cambiar Password" (click)="changePassword(admin)"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 			      </th>
 			    </tr>
 			  </tbody>

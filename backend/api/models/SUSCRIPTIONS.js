@@ -12,6 +12,15 @@ module.exports = {
   			type: 'integer',
 	  		primaryKey: true,
 	  		autoIncrement: true
+  		},
+  		USER:{
+  			model: 'USERS'
+  		},
+  		PLAN:{
+  			model: 'PLANS'
+  		},
+  		SUSCRIPTION_INFO:{
+  			model: 'SUSCRIPTION_INFO'
   		}
   	},
   	autoPK: false,

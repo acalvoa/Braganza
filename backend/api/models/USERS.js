@@ -35,6 +35,10 @@ module.exports = {
   		GOOGLE: {
   			type: 'string'
   		},
+      ORDERS:{
+        collection: 'ORDERS',
+        via: 'USER'
+      }
       toJSON: function () {
         var user = this.toObject();
         delete user.PASSWORD;

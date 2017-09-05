@@ -38,7 +38,11 @@ module.exports = {
       ORDERS:{
         collection: 'ORDERS',
         via: 'USER'
-      }
+      },
+      SUSCRIPTIONS:{
+        collection: 'SUSCRIPTIONS',
+        via: 'USER'
+      },
       toJSON: function () {
         var user = this.toObject();
         delete user.PASSWORD;
